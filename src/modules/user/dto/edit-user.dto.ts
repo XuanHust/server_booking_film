@@ -1,4 +1,5 @@
-import { IsBoolean, IsEmail, IsOptional, IsString } from "class-validator";
+import { UserRole } from "@prisma/client";
+import { IsBoolean, IsEmail, IsEnum, IsOptional, IsString } from "class-validator";
 
 export class EditUserDto {
   @IsEmail()
@@ -16,4 +17,8 @@ export class EditUserDto {
   @IsOptional()
   @IsBoolean()
   active?: boolean;
+
+  @IsEnum(UserRole)
+  @IsOptional()
+  role?: UserRole
 }
