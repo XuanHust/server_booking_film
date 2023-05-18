@@ -5,6 +5,10 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
@@ -13,6 +17,14 @@ datasource db {
 enum UserRole {
   ADMIN
   USER
+}
+
+enum GenreType {
+  ACTION
+  EMOTIONAL
+  ROMANTIC
+  HUMOROUS
+  HORRIFIED
 }
 
 model User {
@@ -30,4 +42,44 @@ model User {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime? @updatedAt
   hashedRt    String?
+}
+
+model Movies {
+  id  Int @id @default(autoincrement())
+  title  String
+  genre GenreType
+  director String
+  duration Int
+
+  screenings Screenings[]
+}
+
+model Cinemas {
+  id  Int @id @default(autoincrement())
+  name String
+  address String
+  city String
+
+  screenings Screenings[]
+}
+
+model Screenings {
+  id  Int @id @default(autoincrement()) 
+  movieId Int 
+  cinemaId Int
+  startTime DateTime
+
+  movies Movies? @relation(fields: [movieId], references: [id], map: "Screening_movies_key")
+  cinemas Cinemas? @relation(fields: [cinemaId], references: [id], map: "Screening_cinemas_key")
+
+  tickets Tickets[]
+}
+
+model Tickets {
+  id  Int @id @default(autoincrement()) 
+  screeningId Int
+  seatNumber String
+  price Decimal
+
+  screenings Screenings @relation(fields: [screeningId], references: [id], map: "Ticket_screening_key")
 }

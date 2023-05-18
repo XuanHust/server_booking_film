@@ -1,15 +1,15 @@
-import { UserRole } from "@prisma/client";
-import { IsEnum, IsOptional } from "class-validator";
-import { IQuery } from "src/dto/query";
+import { UserRole } from '@prisma/client'
+import { IsEnum, IsOptional } from 'class-validator'
+import { IQuery } from 'src/dto/query'
 
 export class GetUserDto extends IQuery {
   @IsEnum(UserRole)
   @IsOptional()
-  role?: UserRole;
+  role?: UserRole
 
   @IsOptional()
-  active?: number;
+  active?: number
 
   @IsOptional()
-  name?: string;
+  name?: string
 }

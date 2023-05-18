@@ -2,10 +2,6 @@ import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Put, Query, U
 import { GetCurrentUser } from 'src/decorators'
 import { AccessTokenGuard } from 'src/guards'
 import RoleGuard from 'src/guards/admin-role.guard'
-import { EditUserDto } from './dto'
-import { CreateUserDto } from './dto/create-user.dto'
-import { GetUserDto } from './dto/get-user.dto'
-import { UserService } from './user.service'
 
 @Controller({
   path: '/users',

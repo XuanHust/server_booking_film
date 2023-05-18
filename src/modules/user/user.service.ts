@@ -1,37 +1,37 @@
-import { ConflictException, ForbiddenException, Injectable } from "@nestjs/common";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
-import { plainToClass } from "class-transformer";
-import { PrismaService } from "../prisma/prisma.service";
-import { EditUserDto } from "./dto";
-import { CreateUserDto } from "./dto/create-user.dto";
-import { GetUserDto } from "./dto/get-user.dto";
-import { UserEntity } from "./entities/user.entity";
-import * as argon from "argon2";
+import { ConflictException, ForbiddenException, Injectable } from '@nestjs/common'
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime'
+import { plainToClass } from 'class-transformer'
+import { PrismaService } from '../prisma/prisma.service'
+import { EditUserDto } from './dto'
+import { CreateUserDto } from './dto/create-user.dto'
+import { GetUserDto } from './dto/get-user.dto'
+import { UserEntity } from './entities/user.entity'
+import * as argon from 'argon2'
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async create(createUserDto: CreateUserDto) {
     const usernameUnique = await this.prisma.user.count({
       where: {
         username: createUserDto.username
       }
-    });
+    })
     if (usernameUnique) {
-      throw new ConflictException("Username đã tồn tại. Vui lòng thử lại!");
+      throw new ConflictException('Username đã tồn tại. Vui lòng thử lại!')
     }
 
     const emailUnique = await this.prisma.user.count({
       where: {
         email: createUserDto.email
       }
-    });
+    })
     if (emailUnique) {
-      throw new ConflictException("Email đã được sử dụng. Vui lòng thử lại!");
+      throw new ConflictException('Email đã được sử dụng. Vui lòng thử lại!')
     }
 
-    const hash = await argon.hash(createUserDto.password);
+    const hash = await argon.hash(createUserDto.password)
     const user = await this.prisma.user
       .create({
         data: {
@@ -39,23 +39,23 @@ export class UserService {
           email: createUserDto.email,
           phoneNumber: createUserDto.phoneNumber,
           password: hash,
-          name: createUserDto.name,
+          name: createUserDto.name
         }
       })
       .catch((error) => {
         if (error instanceof PrismaClientKnownRequestError) {
-          if (error.code === "P2002") {
-            throw new ForbiddenException("Credentials incorrect");
+          if (error.code === 'P2002') {
+            throw new ForbiddenException('Credentials incorrect')
           }
         }
-        throw error;
-      });
+        throw error
+      })
 
-    return plainToClass(UserEntity, user);
+    return plainToClass(UserEntity, user)
   }
 
   async changePasswordUser(uid: number, newPassword: string): Promise<boolean> {
-    const hash = await argon.hash(newPassword);
+    const hash = await argon.hash(newPassword)
     await this.prisma.user.updateMany({
       where: {
         id: uid
@@ -63,8 +63,8 @@ export class UserService {
       data: {
         password: hash
       }
-    });
-    return true;
+    })
+    return true
   }
 
   async findById(userId: number): Promise<UserEntity> {
@@ -72,9 +72,9 @@ export class UserService {
       where: {
         id: userId
       }
-    });
+    })
 
-    return plainToClass(UserEntity, user);
+    return plainToClass(UserEntity, user)
   }
 
   async editUser(userId: number, dto: EditUserDto): Promise<UserEntity> {
@@ -82,9 +82,9 @@ export class UserService {
       where: {
         id: userId
       }
-    });
+    })
     if (!existUser) {
-      throw new ConflictException("Tài khoản không tồn tại!");
+      throw new ConflictException('Tài khoản không tồn tại!')
     }
 
     if (dto.email) {
@@ -95,9 +95,9 @@ export class UserService {
             id: userId
           }
         }
-      });
+      })
       if (emailUnique) {
-        throw new ConflictException("Email đã được sử dụng. Vui lòng thử lại!");
+        throw new ConflictException('Email đã được sử dụng. Vui lòng thử lại!')
       }
     }
     const user = await this.prisma.user
@@ -110,28 +110,28 @@ export class UserService {
         }
       })
       .catch((error) => {
-        throw error;
-      });
-    return plainToClass(UserEntity, user);
+        throw error
+      })
+    return plainToClass(UserEntity, user)
   }
 
   // get user list
   async getUserList(query: GetUserDto) {
-    const { page = 1, size = 10, _q, active, role, name } = query;
-    const skip = (page - 1) * size;
+    const { page = 1, size = 10, _q, active, role, name } = query
+    const skip = (page - 1) * size
     const queryCustom = {
       skip,
       take: +size,
       where: {
-        active: typeof active === "number" ? !!active : undefined,
+        active: typeof active === 'number' ? !!active : undefined,
         role,
         name: {
           contains: name
         }
       }
-    };
+    }
     if (_q) {
-      queryCustom.where["OR"] = {
+      queryCustom.where['OR'] = {
         OR: [
           {
             name: {
@@ -154,7 +154,7 @@ export class UserService {
             }
           }
         ]
-      };
+      }
     }
     const [total, userList] = await Promise.all([
       this.prisma.user.count({ where: queryCustom.where }),
@@ -162,23 +162,23 @@ export class UserService {
         ...queryCustom,
         orderBy: [
           {
-            firstName: "asc"
+            firstName: 'asc'
           },
-          { lastName: "asc" },
+          { lastName: 'asc' },
           {
-            middleName: "asc"
+            middleName: 'asc'
           }
         ]
       })
-    ]);
+    ])
     return {
       data: plainToClass(UserEntity, <any[]>userList),
       pagination: {
         total,
         page,
         size,
-        pageCount: Math.ceil(parseInt(total + "") / size)
+        pageCount: Math.ceil(parseInt(total + '') / size)
       }
-    };
+    }
   }
 }
