@@ -1,59 +1,44 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Put, Query, UseGuards } from '@nestjs/common'
-import { GetCurrentUser } from 'src/decorators'
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common'
 import { AccessTokenGuard } from 'src/guards'
-import RoleGuard from 'src/guards/admin-role.guard'
+import { CreateMovieDto } from './dto/create-movies.dto'
+import { EditMovieDto } from './dto/edit-movies.dto'
+import { GetMovieDto } from './dto/get-movies.dto'
+import { MoviesService } from './movies.service'
 
 @Controller({
-  path: '/users',
+  path: '/movies',
   version: '1'
 })
-export class UserController {
-  constructor(private userService: UserService) {}
+export class MoviesController {
+  constructor(private moviesService: MoviesService) {}
 
   @Post()
   @UseGuards(AccessTokenGuard)
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto)
-  }
-
-  @Post('changePassword/:id')
-  @HttpCode(HttpStatus.OK)
-  // @UseGuards(RoleGuard("ADMIN"))
-  @UseGuards(AccessTokenGuard)
-  changePasswordUser(@Param('id') uid: number, @Body() { newPassword }: { newPassword: string }): Promise<boolean> {
-    return this.userService.changePasswordUser(uid, newPassword)
-  }
-
-  @Get('me')
-  @UseGuards(AccessTokenGuard)
-  getMe(@GetCurrentUser('id') userId: number) {
-    return this.userService.findById(userId)
-  }
-
-  @Get()
-  @UseGuards(AccessTokenGuard)
-  getUserList(@Query() query: GetUserDto) {
-    return this.userService.getUserList(query)
+  create(@Body() createMovieDto: CreateMovieDto) {
+    return this.moviesService.create(createMovieDto)
   }
 
   @Get(':id')
   @UseGuards(AccessTokenGuard)
-  getUserById(@Param('id') id: number) {
-    return this.userService.findById(id)
+  getMovie(@Param('id') id: number) {
+    return this.moviesService.getMovie(id)
   }
 
-  @Put('me')
-  @UseGuards(AccessTokenGuard, RoleGuard(['ADMIN', 'USER']))
+  @Get()
   @UseGuards(AccessTokenGuard)
-  updateMe(@GetCurrentUser('id') userId: number, @Body() dto: EditUserDto) {
-    return this.userService.editUser(userId, dto)
+  getMovies(@Query() query: GetMovieDto) {
+    return this.moviesService.getMovies(query)
   }
 
-  @Put(':id')
-  // @UseInterceptors(new ActionLogInterceptor(ModalType.USER, ActionType.UPDATE))
-  @UseGuards(RoleGuard('ADMIN'))
+  @Put()
   @UseGuards(AccessTokenGuard)
-  editUser(@Param('id') uid: number, @Body() dto: EditUserDto) {
-    return this.userService.editUser(uid, dto)
+  editMovie(@Param('id') id: number, @Body() editMovieDto: EditMovieDto) {
+    return this.moviesService.editMovie(id, editMovieDto)
+  }
+
+  @Delete()
+  @UseGuards(AccessTokenGuard)
+  deleteMovie(@Param('id') id: number) {
+    return this.moviesService.deleteMovie(id)
   }
 }

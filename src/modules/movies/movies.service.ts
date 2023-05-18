@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common'
+import { BadRequestException, Injectable } from '@nestjs/common'
 import { PrismaService } from '../prisma/prisma.service'
 import { CreateMovieDto } from './dto/create-movies.dto'
 import { EditMovieDto } from './dto/edit-movies.dto'
+import { GetMovieDto } from './dto/get-movies.dto'
 
 @Injectable()
 export class MoviesService {
@@ -11,7 +12,78 @@ export class MoviesService {
     return await this.prisma.movies.create({ data: createMovieDto })
   }
 
-  // async edit(editMovieDto: EditMovieDto) {
-  //   re
-  // }
+  async getMovie(id: number) {
+    return await this.prisma.movies.findUnique({
+      where: {
+        id
+      }
+    })
+  }
+
+  async getMovies(query: GetMovieDto) {
+    const { page, size, genre, _q, title, director } = query
+    const skip = (page - 1) * size
+
+    const condition: any = {
+      genre: genre,
+      title: title,
+      director: director
+    }
+    if (_q) {
+      condition['OR'] = {
+        OR: [
+          {
+            code: {
+              contains: _q
+            }
+          },
+          {
+            name: {
+              contains: _q
+            }
+          }
+        ]
+      }
+    }
+
+    const total = await this.prisma.movies.count({
+      where: condition
+    })
+
+    const data = await this.prisma.movies.findMany({
+      where: condition,
+      skip,
+      take: +size
+    })
+    return {
+      total,
+      data
+    }
+  }
+
+  async editMovie(id: number, editMovieDto: EditMovieDto) {
+    const exist = !!(await this.prisma.movies.count({ where: { id: id } }))
+    if (exist) {
+      throw new BadRequestException('Có lỗi xảy ra!')
+    }
+    return await this.prisma.movies.update({
+      where: {
+        id
+      },
+      data: editMovieDto
+    })
+  }
+
+  async deleteMovie(id: number) {
+    const exist = !!(await this.prisma.movies.count({ where: { id: id } }))
+    if (exist) {
+      throw new BadRequestException('Có lỗi xảy ra!')
+    }
+
+    return await this.prisma.movies.delete({
+      where: {
+        id
+      }
+    })
+  }
 }
