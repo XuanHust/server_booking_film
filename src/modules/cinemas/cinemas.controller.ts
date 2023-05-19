@@ -30,13 +30,13 @@ export class CinemasController {
     return this.CinemasService.getCinemas(query)
   }
 
-  @Put()
+  @Put(':id')
   @UseGuards(AccessTokenGuard)
   editCinema(@Param('id') id: number, @Body() editCinemaDto: EditCinemaDto) {
     return this.CinemasService.editCinema(id, editCinemaDto)
   }
 
-  @Delete()
+  @Delete('delete/:id')
   @UseGuards(AccessTokenGuard)
   deleteCinema(@Param('id') id: number) {
     return this.CinemasService.deleteCinema(id)

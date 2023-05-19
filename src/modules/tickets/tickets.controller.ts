@@ -30,13 +30,13 @@ export class TicketsController {
     return this.ticketsService.getTickets(query)
   }
 
-  @Put()
+  @Put(':id')
   @UseGuards(AccessTokenGuard)
   editTicket(@Param('id') id: number, @Body() editTicketDto: EditTicketDto) {
     return this.ticketsService.editTicket(id, editTicketDto)
   }
 
-  @Delete()
+  @Delete('delete/:id')
   @UseGuards(AccessTokenGuard)
   deleteTicket(@Param('id') id: number) {
     return this.ticketsService.deleteTicket(id)

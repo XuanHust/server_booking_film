@@ -30,13 +30,13 @@ export class MoviesController {
     return this.moviesService.getMovies(query)
   }
 
-  @Put()
+  @Put(':id')
   @UseGuards(AccessTokenGuard)
   editMovie(@Param('id') id: number, @Body() editMovieDto: EditMovieDto) {
     return this.moviesService.editMovie(id, editMovieDto)
   }
 
-  @Delete()
+  @Delete('delete/:id')
   @UseGuards(AccessTokenGuard)
   deleteMovie(@Param('id') id: number) {
     return this.moviesService.deleteMovie(id)

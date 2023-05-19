@@ -30,13 +30,13 @@ export class ScreeningsController {
     return this.screeningsService.getScreenings(query)
   }
 
-  @Put()
+  @Put(':id')
   @UseGuards(AccessTokenGuard)
   editScreening(@Param('id') id: number, @Body() editScreeningDto: EditScreeningDto) {
     return this.screeningsService.editScreening(id, editScreeningDto)
   }
 
-  @Delete()
+  @Delete('delete/:id')
   @UseGuards(AccessTokenGuard)
   deleteScreening(@Param('id') id: number) {
     return this.screeningsService.deleteScreening(id)
