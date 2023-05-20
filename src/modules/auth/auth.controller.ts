@@ -1,49 +1,49 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common'
 
-import { GetCurrentUser } from "src/decorators";
-import { AccessTokenGuard, RefeshTokenGuard } from "src/guards";
-import RoleGuard from "src/guards/admin-role.guard";
-import { AuthService } from "./auth.service";
-import { AuthDto } from "./dto";
-import { Tokens } from "./types";
+import { GetCurrentUser } from 'src/decorators'
+import { AccessTokenGuard, RefeshTokenGuard } from 'src/guards'
+import RoleGuard from 'src/guards/admin-role.guard'
+import { AuthService } from './auth.service'
+import { AuthDto } from './dto'
+import { Tokens } from './types'
 
 @Controller({
-  path: "/auth",
-  version: "1"
+  path: '/auth',
+  version: '1'
 })
 export class AuthControllerV1 {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   @HttpCode(HttpStatus.OK)
-  @Post("signIn")
+  @Post('signIn')
   signIn(@Body() auth: AuthDto) {
-    return this.authService.signIn(auth);
+    return this.authService.signIn(auth)
   }
 
-  @Post("signOut")
+  @Post('signOut')
   @UseGuards(AccessTokenGuard)
   @HttpCode(HttpStatus.OK)
-  logout(@GetCurrentUser("id") userId: number): Promise<boolean> {
-    return this.authService.logout(userId);
+  logout(@GetCurrentUser('id') userId: number): Promise<boolean> {
+    return this.authService.logout(userId)
   }
 
-  @Post("changePassword")
+  @Post('changePassword')
   @HttpCode(HttpStatus.OK)
-  @UseGuards(AccessTokenGuard, RoleGuard(["ADMIN", "USER"]))
+  @UseGuards(AccessTokenGuard, RoleGuard(['ADMIN', 'USER']))
   changePassword(
-    @GetCurrentUser("id") userId: number,
+    @GetCurrentUser('id') userId: number,
     @Body() { newPassword }: { newPassword: string }
   ): Promise<boolean> {
-    return this.authService.changePassword(userId, newPassword);
+    return this.authService.changePassword(userId, newPassword)
   }
 
   @UseGuards(RefeshTokenGuard)
-  @Post("refresh")
+  @Post('refresh')
   @HttpCode(HttpStatus.OK)
   refreshTokens(
-    @GetCurrentUser("id") userId: number,
-    @GetCurrentUser("refreshToken") refreshToken: string
+    @GetCurrentUser('id') userId: number,
+    @GetCurrentUser('refreshToken') refreshToken: string
   ): Promise<Tokens> {
-    return this.authService.refreshTokens(userId, refreshToken);
+    return this.authService.refreshTokens(userId, refreshToken)
   }
 }

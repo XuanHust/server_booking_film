@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Beta Thanh Xuân",
+    "address": "Tầng hầm B1, tòa nhà Golden West, Số 2, Lê Văn Thiêm, Thanh Xuân, Hà Nội",
+    "city": "Hà Nội"
+  },
+  {
+    "name": "Beta Mỹ Đình",
+    "address": "Tầng hầm B1, tòa nhà Golden Palace, Đường Mễ Trì, Phường Mễ Trì, Quận Nam Từ Liêm, Hà Nội",
+    "city": "Hà Nội"
+  },
+  {
+    "name": "Beta Đan Phượng",
+    "address": "Tầng 2 Tòa nhà HHA, Khu Đô Thị XPHomes (Tân Tây Đô), Xã Tân Lập, Huyện Đan Phượng, TP Hà Nội",
+    "city": "Hà Nội"
+  },
+  {
+    "name": "Beta Giải Phóng",
+    "address": "Tầng 3, Imperial Plaza, 360 Giải Phóng, Phương Liệt, Thanh Xuân, Hà Nội",
+    "city": "Hà Nội"
+  },
+  {
+    "name": "CGV Vincom Bà Triệu",
+    "address": "Tầng 6, VinCom Center Hà Nội, 191 Bà Triệu, Q. Hai Bà Trưng, Tp. Hà Nộ",
+    "city": "Hà Nội"
+  },
+  {
+    "name": "CGV Mipec Tower",
+    "address": "Tầng 5, MIPEC Tower, 229 Tây Sơn, Q. Đống Đa, Tp. Hà Nội",
+    "city": "Hà Nội"
+  },
+  {
+    "name": "CGV Hồ Gươm Plaza",
+    "address": "Tầng 3, TTTM Hồ Gươm Plaza, 110 Trần Phú, P. Mỗ Lao, Q. Hà Đông, Tp. Hà Nội",
+    "city": "Hà Nội"
+  },
+  {
+    "name": "CGV IPH Hà Nội",
+    "address": "Tầng 4, Indochina Plaza Hà Nội, 241 Xuân Thủy, Q. Cầu Giấy, Tp. Hà Nội",
+    "city": "Hà Nội"
+  },
+  {
+    "name": "CGV Rice City",
+    "address": " CGV Rice City Tầng 2 và 4, Tòa nhà Trung - RICE CITY Linh Đàm, Phường Hoàng Liệt, Quận Hoàng Mai, Tp. Hà Nội",
+    "city": "Hà Nội"
+  },
+  {
+    "name": "CGV Trương Định Plaza",
+    "address": "Tầng 5 Trương Định Plaza, 461 Trương Định, Hoàng Mai, Hà Nội",
+    "city": "Hà Nội"
+  }
+]

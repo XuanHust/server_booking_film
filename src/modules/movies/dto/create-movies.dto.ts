@@ -1,4 +1,3 @@
-import { GenreType } from '@prisma/client'
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
 
 export class CreateMovieDto {
@@ -8,13 +7,21 @@ export class CreateMovieDto {
 
   @IsString()
   @IsNotEmpty()
-  genre: GenreType
+  genre: string
 
   @IsString()
   @IsNotEmpty()
   director: string
 
+  @IsString()
+  @IsNotEmpty()
+  trailer: string
+
   @IsNumber()
   @IsNotEmpty()
   duration: number
+
+  @IsNumber()
+  @IsNotEmpty()
+  bookingId: number
 }

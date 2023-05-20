@@ -1,4 +1,3 @@
-import { GenreType } from '@prisma/client'
 import { IsNumber, IsOptional, IsString } from 'class-validator'
 
 export class EditMovieDto {
@@ -8,7 +7,7 @@ export class EditMovieDto {
 
   @IsString()
   @IsOptional()
-  genre: GenreType
+  genre: string
 
   @IsString()
   @IsOptional()
@@ -17,4 +16,12 @@ export class EditMovieDto {
   @IsNumber()
   @IsOptional()
   duration: number
+
+  @IsNumber()
+  @IsOptional()
+  bookingId: number
+
+  @IsString()
+  @IsOptional()
+  trailer: string
 }

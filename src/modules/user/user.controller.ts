@@ -1,4 +1,17 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Put, Query, UseGuards } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+  Put,
+  Query,
+  UseGuards
+} from '@nestjs/common'
 import { GetCurrentUser } from 'src/decorators'
 import { AccessTokenGuard } from 'src/guards'
 import RoleGuard from 'src/guards/admin-role.guard'
@@ -15,14 +28,14 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Post()
-  // @UseGuards(AccessTokenGuard)
+  @UseGuards(AccessTokenGuard)
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto)
   }
 
   @Post('changePassword/:id')
   @HttpCode(HttpStatus.OK)
-  // @UseGuards(RoleGuard("ADMIN"))
+  // @UseGuards(RoleGuard('ADMIN'))
   @UseGuards(AccessTokenGuard)
   changePasswordUser(@Param('id') uid: number, @Body() { newPassword }: { newPassword: string }): Promise<boolean> {
     return this.userService.changePasswordUser(uid, newPassword)
@@ -54,7 +67,6 @@ export class UserController {
   }
 
   @Patch(':id')
-  // @UseInterceptors(new ActionLogInterceptor(ModalType.USER, ActionType.UPDATE))
   // @UseGuards(RoleGuard('ADMIN'))
   @UseGuards(AccessTokenGuard)
   editUser(@Param('id') uid: number, @Body() dto: EditUserDto) {

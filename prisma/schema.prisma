@@ -19,14 +19,6 @@ enum UserRole {
   USER
 }
 
-enum GenreType {
-  ACTION
-  EMOTIONAL
-  ROMANTIC
-  HUMOROUS
-  HORRIFIED
-}
-
 model User {
   id          Int       @id @default(autoincrement())
   name        String
@@ -42,16 +34,44 @@ model User {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime? @updatedAt
   hashedRt    String?
+
+  bookings Bookings[]
+  reviews  Reviews[]
+}
+
+model Bookings {
+  id  Int @id @default(autoincrement())
+  userId Int
+  movieId Int
+  createdAt   DateTime  @default(now())
+
+  user User? @relation(fields: [userId], references: [id], map: "User_booking_key")
+  movies Movies? @relation(fields: [movieId], references: [id], map: "Bookings_movies_key")
+}
+
+model Reviews {
+  id  Int @id @default(autoincrement())
+  star Int?
+  message String?       @db.LongText
+  userId Int
+  moviesId Int
+
+  movies Movies? @relation(fields: [moviesId], references: [id], map: "Movies_review_key")
+  user User? @relation(fields: [userId], references: [id], map: "User_review_key")
 }
 
 model Movies {
   id  Int @id @default(autoincrement())
   title  String
-  genre GenreType
+  genre String
   director String
   duration Int
+  trailer   String
+  createdAt   DateTime  @default(now())
 
   screenings Screenings[]
+  reviews Reviews[]
+  bookings Bookings[]
 }
 
 model Cinemas {
@@ -59,6 +79,7 @@ model Cinemas {
   name String
   address String
   city String
+  createdAt   DateTime  @default(now())
 
   screenings Screenings[]
 }
@@ -68,6 +89,7 @@ model Screenings {
   movieId Int 
   cinemaId Int
   startTime DateTime
+  createdAt   DateTime  @default(now())
 
   movies Movies? @relation(fields: [movieId], references: [id], map: "Screening_movies_key")
   cinemas Cinemas? @relation(fields: [cinemaId], references: [id], map: "Screening_cinemas_key")
@@ -80,6 +102,7 @@ model Tickets {
   screeningId Int
   seatNumber String
   price Decimal
+  createdAt   DateTime  @default(now())
 
   screenings Screenings @relation(fields: [screeningId], references: [id], map: "Ticket_screening_key")
 }

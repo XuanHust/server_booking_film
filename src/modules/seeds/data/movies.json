@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Quá Nhanh Quá Nguy Hiểm 10",
+    "genre": "Hành động",
+    "director": "actor1, actor2",
+    "duration": 140,
+    "trailer": "https://www.youtube.com/embed/JSE9vhCuxs8?autoplay=1&enablejsapi=1&origin=https%3A%2F%2Fmomo.vn&widgetid=1"
+  },
+  {
+    "title": "Doraemon: Nobita và Vùng Đất Lý Tưởng Trên Bầu Trời",
+    "genre": "Hoạt hình",
+    "director": "actor1, actor2",
+    "duration": 107,
+    "trailer": "https://www.youtube.com/embed/DKHad8YOuxg?autoplay=1&enablejsapi=1&origin=https%3A%2F%2Fmomo.vn&widgetid=3"
+  },
+  {
+    "title": "Vệ Binh Dải Ngân Hà 3",
+    "genre": "Hành động",
+    "director": "actor1, actor2",
+    "duration": 149,
+    "trailer": "https://www.youtube.com/embed/nBH8Anzfkvc?autoplay=1&enablejsapi=1&origin=https%3A%2F%2Fmomo.vn&widgetid=5"
+  },
+  {
+    "title": "Cô Bé Cứu Hỏa",
+    "genre": "Hoạt hình",
+    "director": "actor1, actor2",
+    "duration": 92,
+    "trailer": "https://www.youtube.com/embed/wcEQSXF_NeE?autoplay=1&enablejsapi=1&origin=https%3A%2F%2Fmomo.vn&widgetid=7"
+  }
+]

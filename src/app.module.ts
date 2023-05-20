@@ -11,6 +11,7 @@ import { MoviesModule } from './modules/movies/movies.module'
 import { CinemasModule } from './modules/cinemas/cinemas.module'
 import { ScreeningsModule } from './modules/screenings/screenings.module'
 import { TicketsModule } from './modules/tickets/tickets.module'
+import { BookingsModule } from './modules/bookings/bookings.module'
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { TicketsModule } from './modules/tickets/tickets.module'
     MoviesModule,
     CinemasModule,
     ScreeningsModule,
-    TicketsModule
+    TicketsModule,
+    BookingsModule
   ],
   controllers: [AppController],
   providers: [AppService]
