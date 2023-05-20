@@ -44,42 +44,50 @@ model User {
   hashedRt    String?
 }
 
-model Movies {
+model Tours {
   id  Int @id @default(autoincrement())
+	name String
   title  String
   genre GenreType
   director String
-  duration Int
+  price Decimal
 
-  screenings Screenings[]
+  bookings Bookings[]
+	reviews Reviews[]
 }
 
-model Cinemas {
+model Customers {
   id  Int @id @default(autoincrement())
+	username String
+  email String
+  password String
   name String
   address String
   city String
 
-  screenings Screenings[]
+  reviews Reviews[]
+	bookings Bookings[]
 }
 
-model Screenings {
+model Bookings {
   id  Int @id @default(autoincrement()) 
-  movieId Int 
-  cinemaId Int
-  startTime DateTime
+  tourId Int 
+  customerId Int
+  bookingDate DateTime
 
-  movies Movies? @relation(fields: [movieId], references: [id], map: "Screening_movies_key")
-  cinemas Cinemas? @relation(fields: [cinemaId], references: [id], map: "Screening_cinemas_key")
+  tours Tours? @relation(fields: [tourId], references: [id], map: "Booking_tours_key")
+  customers Customers? @relation(fields: [customerId], references: [id], map: "Bookings_customer_key")
 
-  tickets Tickets[]
 }
 
-model Tickets {
+model Reviews {
   id  Int @id @default(autoincrement()) 
-  screeningId Int
-  seatNumber String
-  price Decimal
+  customerId Int
+	tourId Int
+  rating String
+  comment String
 
-  screenings Screenings @relation(fields: [screeningId], references: [id], map: "Ticket_screening_key")
+  tours Tours? @relation(fields: [tourId], references: [id], map: "Reviews_customer_key")
+	customers Customers? @relation(fields: [customerId], references: [id], map: "Reviews_tour_key")
+
 }
