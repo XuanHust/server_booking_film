@@ -1,22 +1,22 @@
-import { Exclude } from "class-transformer";
+import { Exclude } from 'class-transformer'
 
 export class UserEntity {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  phoneNumber: string;
-  role: string;
-  createdAt: Date;
-  updatedAt: Date;
-  active: boolean;
+  id: number
+  name: string
+  username: string
+  email: string
+  phoneNumber: string
+  role: string
+  createdAt: Date
+  updatedAt: Date
+  active: boolean
 
   @Exclude()
-  password: string;
+  password: string
   @Exclude()
-  hashedRt: string;
+  hashedRt: string
 
   constructor(partial: Partial<UserEntity>) {
-    Object.assign(this, partial);
+    Object.assign(this, partial)
   }
 }

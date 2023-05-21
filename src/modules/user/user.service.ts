@@ -78,7 +78,7 @@ export class UserService {
       }
     })
 
-    return plainToClass(UserEntity, user)
+    return user
   }
 
   async editUser(userId: number, dto: EditUserDto): Promise<UserEntity> {
