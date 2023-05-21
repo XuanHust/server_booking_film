@@ -17,10 +17,6 @@ export class EditMovieDto {
   @IsOptional()
   duration: number
 
-  @IsNumber()
-  @IsOptional()
-  bookingId: number
-
   @IsString()
   @IsOptional()
   trailer: string

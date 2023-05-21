@@ -3,6 +3,8 @@
     "title": "Quá Nhanh Quá Nguy Hiểm 10",
     "genre": "Hành động",
     "director": "actor1, actor2",
+    "banner": "https://static.mservice.io/cinema/momo-upload-api-230202102047-638109300473359982.jpg",
+    "poster": "https://img.cdn.vncdn.io/cinema/img/575493613191880-7tbQEN9yEFkuxhsvF0eh7dckLTQ.jpg",
     "duration": 140,
     "trailer": "https://www.youtube.com/embed/JSE9vhCuxs8?autoplay=1&enablejsapi=1&origin=https%3A%2F%2Fmomo.vn&widgetid=1"
   },
@@ -10,6 +12,8 @@
     "title": "Doraemon: Nobita và Vùng Đất Lý Tưởng Trên Bầu Trời",
     "genre": "Hoạt hình",
     "director": "actor1, actor2",
+    "banner": "https://img.cdn.vncdn.io/cinema/img/7393010392198951-7vxuOzbsDgGRKNiB9yzvSHaNlNi.jpg",
+    "poster": "https://img.cdn.vncdn.io/cinema/img/7393010245356177-65moukkKV78Zwe7DMk81FQaL6DG.jpg",
     "duration": 107,
     "trailer": "https://www.youtube.com/embed/DKHad8YOuxg?autoplay=1&enablejsapi=1&origin=https%3A%2F%2Fmomo.vn&widgetid=3"
   },
@@ -17,6 +21,8 @@
     "title": "Vệ Binh Dải Ngân Hà 3",
     "genre": "Hành động",
     "director": "actor1, actor2",
+    "banner": "https://img.cdn.vncdn.io/cinema/img/90225495390581584-drC4nWd3Bx3F9IHB7DpknXZS2zR.jpg",
+    "poster": "https://traffic-edge25.cdn.vncdn.io/cinema/img/90225495554138848-xoCKrqqqi4wUCcI3MdFCq3Q9J0a.jpg",
     "duration": 149,
     "trailer": "https://www.youtube.com/embed/nBH8Anzfkvc?autoplay=1&enablejsapi=1&origin=https%3A%2F%2Fmomo.vn&widgetid=5"
   },
@@ -24,6 +30,8 @@
     "title": "Cô Bé Cứu Hỏa",
     "genre": "Hoạt hình",
     "director": "actor1, actor2",
+    "banner": "https://img.cdn.vncdn.io/cinema/img/8550847674710991-rEX8tOPvdgWqURQWx6oEzQqSWsM.jpg",
+    "poster": "https://img.cdn.vncdn.io/cinema/img/8550848002433769-yOdjQduJAD8XfUPi6MIMbbki1n.jpg",
     "duration": 92,
     "trailer": "https://www.youtube.com/embed/wcEQSXF_NeE?autoplay=1&enablejsapi=1&origin=https%3A%2F%2Fmomo.vn&widgetid=7"
   }

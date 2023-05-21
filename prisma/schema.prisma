@@ -64,6 +64,8 @@ model Movies {
   id  Int @id @default(autoincrement())
   title  String
   genre String
+  banner String?
+  poster String?
   director String
   duration Int
   trailer   String

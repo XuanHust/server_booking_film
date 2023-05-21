@@ -21,14 +21,13 @@ export class MoviesService {
   }
 
   async getMovies(query: GetMovieDto) {
-    const { page, size, genre, _q, title, director, bookingId } = query
+    const { page, size, genre, _q, title, director } = query
     const skip = (page - 1) * size
 
     const condition: any = {
       genre: genre,
       title: title,
-      director: director,
-      bookingId: bookingId
+      director: director
     }
     if (_q) {
       condition['OR'] = {
@@ -64,7 +63,7 @@ export class MoviesService {
 
   async editMovie(id: number, editMovieDto: EditMovieDto) {
     const exist = !!(await this.prisma.movies.count({ where: { id: id } }))
-    if (exist) {
+    if (!exist) {
       throw new BadRequestException('Có lỗi xảy ra!')
     }
     return await this.prisma.movies.update({
@@ -77,7 +76,7 @@ export class MoviesService {
 
   async deleteMovie(id: number) {
     const exist = !!(await this.prisma.movies.count({ where: { id: id } }))
-    if (exist) {
+    if (!exist) {
       throw new BadRequestException('Có lỗi xảy ra!')
     }
 

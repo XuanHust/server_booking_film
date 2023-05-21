@@ -20,8 +20,4 @@ export class CreateMovieDto {
   @IsNumber()
   @IsNotEmpty()
   duration: number
-
-  @IsNumber()
-  @IsNotEmpty()
-  bookingId: number
 }
