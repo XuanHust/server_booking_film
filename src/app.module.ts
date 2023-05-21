@@ -7,10 +7,7 @@ import configuration from './config/configuration'
 import { AuthModule } from './modules/auth/auth.module'
 import { PrismaModule } from './modules/prisma/prisma.module'
 import { UserModule } from './modules/user/user.module'
-import { TourModule } from './modules/tours/tours.module'
-import { CinemasModule } from './modules/cinemas/cinemas.module'
-import { ScreeningsModule } from './modules/screenings/screenings.module'
-import { TicketsModule } from './modules/tickets/tickets.module'
+import { ToursModule } from './modules/tours/tours.module'
 
 @Module({
   imports: [
@@ -21,10 +18,7 @@ import { TicketsModule } from './modules/tickets/tickets.module'
     PrismaModule,
     UserModule,
     AuthModule,
-    TourModule,
-    CinemasModule,
-    ScreeningsModule,
-    TicketsModule
+    ToursModule
   ],
   controllers: [AppController],
   providers: [AppService]

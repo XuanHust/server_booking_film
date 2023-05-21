@@ -71,10 +71,14 @@ export class UserService {
     const user = await this.prisma.user.findFirst({
       where: {
         id: userId
+      },
+      include: {
+        reviews: true,
+        bookings: true
       }
     })
 
-    return plainToClass(UserEntity, user)
+    return user
   }
 
   async editUser(userId: number, dto: EditUserDto): Promise<UserEntity> {
@@ -183,6 +187,6 @@ export class UserService {
   }
 
   async deleteUser(id: number) {
-    return await this.prisma.user.delete({where: {id: id}})
+    return await this.prisma.user.delete({ where: { id: id } })
   }
 }

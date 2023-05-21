@@ -5,10 +5,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// generator erd {
-//   provider = "prisma-erd-generator"
-// }
-
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
@@ -19,12 +15,10 @@ enum UserRole {
   USER
 }
 
-enum GenreType {
-  ACTION
-  EMOTIONAL
-  ROMANTIC
-  HUMOROUS
-  HORRIFIED
+enum Status {
+  WATING
+  ACCEPTED
+  CANCELED
 }
 
 model User {
@@ -42,64 +36,42 @@ model User {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime? @updatedAt
   hashedRt    String?
+
+  reviews  Reviews[]
+  bookings Bookings[]
 }
 
 model Tours {
-  id  Int @id @default(autoincrement())
-	cateId Int
-	name String
-  title  String
-  genre GenreType
-  director String
-  price Decimal
+  id          Int      @id @default(autoincrement())
+  tourName    String
+  description String   @db.LongText
+  startDate   DateTime
+  endDate     DateTime
+  price       Decimal
+  capacity    Int
 
-	categories Categories? @relation(fields: [cateId], references: [id], map: "Categories_key")
-
+  reviews  Reviews[]
   bookings Bookings[]
-	reviews Reviews[]
-}
-
-model Categories {
-  id  Int @id @default(autoincrement())
-	name String
-  title  String
-
-  tours Tours[]
-	
-}
-
-model Customers {
-  id  Int @id @default(autoincrement())
-	username String
-  email String
-  password String
-  name String
-  address String
-  city String
-
-  reviews Reviews[]
-	bookings Bookings[]
 }
 
 model Bookings {
-  id  Int @id @default(autoincrement()) 
-  tourId Int 
-  customerId Int
-  bookingDate DateTime
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  tourId      Int
+  bookingDate DateTime @default(now())
+  status      Status   @default(WATING)
 
-  tours Tours? @relation(fields: [tourId], references: [id], map: "Booking_tours_key")
-  customers Customers? @relation(fields: [customerId], references: [id], map: "Bookings_customer_key")
-
+  tours Tours? @relation(fields: [tourId], references: [id], map: "Bookings_tours_key")
+  user  User?  @relation(fields: [userId], references: [id], map: "Bookings_user_key")
 }
 
 model Reviews {
-  id  Int @id @default(autoincrement()) 
-  customerId Int
-	tourId Int
-  rating String
+  id      Int    @id @default(autoincrement())
+  userId  Int
+  tourId  Int
+  rating  String
   comment String
 
-  tours Tours? @relation(fields: [tourId], references: [id], map: "Reviews_customer_key")
-	customers Customers? @relation(fields: [customerId], references: [id], map: "Reviews_tour_key")
-
+  tours Tours? @relation(fields: [tourId], references: [id], map: "Reviews_tours_key")
+  user  User?  @relation(fields: [userId], references: [id], map: "Reviews_user_key")
 }
