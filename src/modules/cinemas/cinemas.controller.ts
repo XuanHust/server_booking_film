@@ -19,13 +19,13 @@ export class CinemasController {
   }
 
   @Get(':id')
-  @UseGuards(AccessTokenGuard)
+  // @UseGuards(AccessTokenGuard)
   getCinema(@Param('id') id: number) {
     return this.CinemasService.getCinema(id)
   }
 
   @Get()
-  @UseGuards(AccessTokenGuard)
+  // @UseGuards(AccessTokenGuard)
   getCinemas(@Query() query: GetCinemaDto) {
     return this.CinemasService.getCinemas(query)
   }

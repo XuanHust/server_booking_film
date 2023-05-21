@@ -19,13 +19,13 @@ export class ReviewsController {
   }
 
   @Get()
-  @UseGuards(AccessTokenGuard)
+  // @UseGuards(AccessTokenGuard)
   findAll(@Query() query: GetReviewDto) {
     return this.reviewsService.findAll(query)
   }
 
   @Get(':id')
-  @UseGuards(AccessTokenGuard)
+  // @UseGuards(AccessTokenGuard)
   findOne(@Param('id') id: string) {
     return this.reviewsService.findOne(+id)
   }

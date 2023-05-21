@@ -18,14 +18,14 @@ export class MoviesController {
     return this.moviesService.create(createMovieDto)
   }
 
-  @Get(':id')
+  // @Get(':id')
   @UseGuards(AccessTokenGuard)
   getMovie(@Param('id') id: number) {
     return this.moviesService.getMovie(id)
   }
 
   @Get()
-  @UseGuards(AccessTokenGuard)
+  // @UseGuards(AccessTokenGuard)
   getMovies(@Query() query: GetMovieDto) {
     return this.moviesService.getMovies(query)
   }

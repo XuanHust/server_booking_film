@@ -19,13 +19,13 @@ export class ScreeningsController {
   }
 
   @Get(':id')
-  @UseGuards(AccessTokenGuard)
+  // @UseGuards(AccessTokenGuard)
   getScreening(@Param('id') id: number) {
     return this.screeningsService.getScreening(id)
   }
 
   @Get()
-  @UseGuards(AccessTokenGuard)
+  // @UseGuards(AccessTokenGuard)
   getscreenings(@Query() query: GetScreeningDto) {
     return this.screeningsService.getScreenings(query)
   }
