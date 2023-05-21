@@ -1,26 +1,26 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
 import { PrismaService } from '../prisma/prisma.service'
-import { CreateMovieDto } from './dto/create-movies.dto'
-import { EditMovieDto } from './dto/edit-movies.dto'
-import { GetMovieDto } from './dto/get-movies.dto'
+import { CreateTourDto } from './dto/create-tours.dto'
+import { EditTourDto } from './dto/edit-tours.dto'
+import { GetTourDto } from './dto/get-tours.dto'
 
 @Injectable()
-export class MoviesService {
+export class TourService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createMovieDto: CreateMovieDto) {
-    return await this.prisma.movies.create({ data: createMovieDto })
+  async create(createMovieDto: CreateTourDto) {
+    return await this.prisma.tours.create({ data: createMovieDto })
   }
 
   async getMovie(id: number) {
-    return await this.prisma.movies.findUnique({
+    return await this.prisma.tours.findUnique({
       where: {
         id
       }
     })
   }
 
-  async getMovies(query: GetMovieDto) {
+  async getMovies(query: GetTourDto) {
     const { page, size, genre, _q, title, director } = query
     const skip = (page - 1) * size
 
@@ -46,11 +46,11 @@ export class MoviesService {
       }
     }
 
-    const total = await this.prisma.movies.count({
+    const total = await this.prisma.tours.count({
       where: condition
     })
 
-    const data = await this.prisma.movies.findMany({
+    const data = await this.prisma.tours.findMany({
       where: condition,
       skip,
       take: +size
@@ -61,12 +61,12 @@ export class MoviesService {
     }
   }
 
-  async editMovie(id: number, editMovieDto: EditMovieDto) {
-    const exist = !!(await this.prisma.movies.count({ where: { id: id } }))
+  async editMovie(id: number, editMovieDto: EditTourDto) {
+    const exist = !!(await this.prisma.tours.count({ where: { id: id } }))
     if (exist) {
       throw new BadRequestException('Có lỗi xảy ra!')
     }
-    return await this.prisma.movies.update({
+    return await this.prisma.tours.update({
       where: {
         id
       },
@@ -75,12 +75,12 @@ export class MoviesService {
   }
 
   async deleteMovie(id: number) {
-    const exist = !!(await this.prisma.movies.count({ where: { id: id } }))
+    const exist = !!(await this.prisma.tours.count({ where: { id: id } }))
     if (exist) {
       throw new BadRequestException('Có lỗi xảy ra!')
     }
 
-    return await this.prisma.movies.delete({
+    return await this.prisma.tours.delete({
       where: {
         id
       }

@@ -46,14 +46,26 @@ model User {
 
 model Tours {
   id  Int @id @default(autoincrement())
+	cateId Int
 	name String
   title  String
   genre GenreType
   director String
   price Decimal
 
+	categories Categories? @relation(fields: [cateId], references: [id], map: "Categories_key")
+
   bookings Bookings[]
 	reviews Reviews[]
+}
+
+model Categories {
+  id  Int @id @default(autoincrement())
+	name String
+  title  String
+
+  tours Tours[]
+	
 }
 
 model Customers {

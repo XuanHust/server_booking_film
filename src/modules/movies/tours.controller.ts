@@ -1,20 +1,20 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common'
 import { AccessTokenGuard } from 'src/guards'
-import { CreateMovieDto } from './dto/create-movies.dto'
-import { EditMovieDto } from './dto/edit-movies.dto'
-import { GetMovieDto } from './dto/get-movies.dto'
-import { MoviesService } from './movies.service'
+import { CreateTourDto } from './dto/create-tours.dto'
+import { EditTourDto } from './dto/edit-tours.dto'
+import { GetTourDto } from './dto/get-tours.dto'
+import { TourService } from './tours.service'
 
 @Controller({
-  path: '/movies',
+  path: '/tours',
   version: '1'
 })
-export class MoviesController {
-  constructor(private moviesService: MoviesService) {}
+export class TourController {
+  constructor(private moviesService: TourService) {}
 
   @Post()
   @UseGuards(AccessTokenGuard)
-  create(@Body() createMovieDto: CreateMovieDto) {
+  create(@Body() createMovieDto: CreateTourDto) {
     return this.moviesService.create(createMovieDto)
   }
 
@@ -26,13 +26,13 @@ export class MoviesController {
 
   @Get()
   @UseGuards(AccessTokenGuard)
-  getMovies(@Query() query: GetMovieDto) {
+  getMovies(@Query() query: GetTourDto) {
     return this.moviesService.getMovies(query)
   }
 
   @Put(':id')
   @UseGuards(AccessTokenGuard)
-  editMovie(@Param('id') id: number, @Body() editMovieDto: EditMovieDto) {
+  editMovie(@Param('id') id: number, @Body() editMovieDto: EditTourDto) {
     return this.moviesService.editMovie(id, editMovieDto)
   }
 

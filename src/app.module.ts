@@ -7,7 +7,7 @@ import configuration from './config/configuration'
 import { AuthModule } from './modules/auth/auth.module'
 import { PrismaModule } from './modules/prisma/prisma.module'
 import { UserModule } from './modules/user/user.module'
-import { MoviesModule } from './modules/movies/movies.module'
+import { TourModule } from './modules/tours/tours.module'
 import { CinemasModule } from './modules/cinemas/cinemas.module'
 import { ScreeningsModule } from './modules/screenings/screenings.module'
 import { TicketsModule } from './modules/tickets/tickets.module'
@@ -21,7 +21,7 @@ import { TicketsModule } from './modules/tickets/tickets.module'
     PrismaModule,
     UserModule,
     AuthModule,
-    MoviesModule,
+    TourModule,
     CinemasModule,
     ScreeningsModule,
     TicketsModule
