@@ -71,6 +71,10 @@ export class UserService {
     const user = await this.prisma.user.findFirst({
       where: {
         id: userId
+      },
+      include: {
+        bookings: true,
+        reviews: true
       }
     })
 
@@ -183,6 +187,6 @@ export class UserService {
   }
 
   async deleteUser(id: number) {
-    return await this.prisma.user.delete({where: {id: id}})
+    return await this.prisma.user.delete({ where: { id: id } })
   }
 }

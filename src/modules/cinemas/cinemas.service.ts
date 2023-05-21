@@ -16,6 +16,9 @@ export class CinemasService {
     return await this.prisma.cinemas.findUnique({
       where: {
         id
+      },
+      include: {
+        screenings: true
       }
     })
   }

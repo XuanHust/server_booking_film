@@ -20,4 +20,12 @@ export class EditMovieDto {
   @IsString()
   @IsOptional()
   trailer: string
+
+  @IsString()
+  @IsOptional()
+  banner: string
+
+  @IsString()
+  @IsOptional()
+  poster: string
 }

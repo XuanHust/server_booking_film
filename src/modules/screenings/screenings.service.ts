@@ -16,6 +16,9 @@ export class ScreeningsService {
     return await this.prisma.screenings.findUnique({
       where: {
         id
+      },
+      include: {
+        tickets: true
       }
     })
   }

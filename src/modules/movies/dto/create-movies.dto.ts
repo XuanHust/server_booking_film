@@ -20,4 +20,12 @@ export class CreateMovieDto {
   @IsNumber()
   @IsNotEmpty()
   duration: number
+
+  @IsString()
+  @IsNotEmpty()
+  banner: string
+
+  @IsString()
+  @IsNotEmpty()
+  poster: string
 }
