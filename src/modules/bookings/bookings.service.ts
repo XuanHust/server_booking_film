@@ -15,28 +15,12 @@ export class BookingsService {
   }
 
   async findAll(query: GetBookingDto) {
-    const { page, size, movieId, _q, userId } = query
+    const { page, size, movieId, userId } = query
     const skip = (page - 1) * size
 
     const condition: any = {
       movieId: movieId,
       userId: userId
-    }
-    if (_q) {
-      condition['OR'] = {
-        OR: [
-          {
-            code: {
-              contains: _q
-            }
-          },
-          {
-            name: {
-              contains: _q
-            }
-          }
-        ]
-      }
     }
 
     const total = await this.prisma.bookings.count({

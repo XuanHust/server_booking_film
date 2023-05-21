@@ -12,28 +12,12 @@ export class ReviewsService {
   }
 
   async findAll(query: GetReviewDto) {
-    const { page, size, userId, _q, moviesId } = query
+    const { page, size, userId, moviesId } = query
     const skip = (page - 1) * size
 
     const condition: any = {
       userId: userId,
       moviesId: moviesId
-    }
-    if (_q) {
-      condition['OR'] = {
-        OR: [
-          {
-            code: {
-              contains: _q
-            }
-          },
-          {
-            name: {
-              contains: _q
-            }
-          }
-        ]
-      }
     }
 
     const total = await this.prisma.reviews.count({

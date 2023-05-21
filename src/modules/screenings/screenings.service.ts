@@ -24,29 +24,13 @@ export class ScreeningsService {
   }
 
   async getScreenings(query: GetScreeningDto) {
-    const { page, size, movieId, _q, cinemaId, startTime } = query
+    const { page, size, movieId, cinemaId, startTime } = query
     const skip = (page - 1) * size
 
     const condition: any = {
       movieId: movieId,
       cinemaId: cinemaId,
       startTime: startTime
-    }
-    if (_q) {
-      condition['OR'] = {
-        OR: [
-          {
-            code: {
-              contains: _q
-            }
-          },
-          {
-            name: {
-              contains: _q
-            }
-          }
-        ]
-      }
     }
 
     const total = await this.prisma.screenings.count({
@@ -66,7 +50,7 @@ export class ScreeningsService {
 
   async editScreening(id: number, editScreeningDto: EditScreeningDto) {
     const exist = !!(await this.prisma.screenings.count({ where: { id: id } }))
-    if (exist) {
+    if (!exist) {
       throw new BadRequestException('Có lỗi xảy ra!')
     }
     return await this.prisma.screenings.update({
@@ -79,7 +63,7 @@ export class ScreeningsService {
 
   async deleteScreening(id: number) {
     const exist = !!(await this.prisma.screenings.count({ where: { id: id } }))
-    if (exist) {
+    if (!exist) {
       throw new BadRequestException('Có lỗi xảy ra!')
     }
 

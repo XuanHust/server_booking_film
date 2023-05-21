@@ -24,11 +24,10 @@ export class CinemasService {
   }
 
   async getCinemas(query: GetCinemaDto) {
-    const { page, size, name, _q, address, city } = query
+    const { page, size, _q, address, city } = query
     const skip = (page - 1) * size
 
     const condition: any = {
-      name: name,
       address: address,
       city: city
     }
@@ -36,7 +35,7 @@ export class CinemasService {
       condition['OR'] = {
         OR: [
           {
-            code: {
+            name: {
               contains: _q
             }
           },
@@ -66,7 +65,7 @@ export class CinemasService {
 
   async editCinema(id: number, editCinemaDto: EditCinemaDto) {
     const exist = !!(await this.prisma.cinemas.count({ where: { id: id } }))
-    if (exist) {
+    if (!exist) {
       throw new BadRequestException('Có lỗi xảy ra!')
     }
     return await this.prisma.cinemas.update({
@@ -79,7 +78,7 @@ export class CinemasService {
 
   async deleteCinema(id: number) {
     const exist = !!(await this.prisma.cinemas.count({ where: { id: id } }))
-    if (exist) {
+    if (!exist) {
       throw new BadRequestException('Có lỗi xảy ra!')
     }
 

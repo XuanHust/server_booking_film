@@ -21,28 +21,12 @@ export class TicketsService {
   }
 
   async getTickets(query: GetTicketDto) {
-    const { page, size, screeningId, _q, seatNumber } = query
+    const { page, size, screeningId, seatNumber } = query
     const skip = (page - 1) * size
 
     const condition: any = {
       screeningId: screeningId,
       seatNumber: seatNumber
-    }
-    if (_q) {
-      condition['OR'] = {
-        OR: [
-          {
-            code: {
-              contains: _q
-            }
-          },
-          {
-            name: {
-              contains: _q
-            }
-          }
-        ]
-      }
     }
 
     const total = await this.prisma.tickets.count({
@@ -62,7 +46,7 @@ export class TicketsService {
 
   async editTicket(id: number, editTicketDto: EditTicketDto) {
     const exist = !!(await this.prisma.tickets.count({ where: { id: id } }))
-    if (exist) {
+    if (!exist) {
       throw new BadRequestException('Có lỗi xảy ra!')
     }
     return await this.prisma.tickets.update({
@@ -75,7 +59,7 @@ export class TicketsService {
 
   async deleteTicket(id: number) {
     const exist = !!(await this.prisma.tickets.count({ where: { id: id } }))
-    if (exist) {
+    if (!exist) {
       throw new BadRequestException('Có lỗi xảy ra!')
     }
 
