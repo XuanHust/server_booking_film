@@ -1,7 +1,8 @@
 import { Status } from '@prisma/client'
-import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator'
+import { IsEnum, IsNumber, IsOptional } from 'class-validator'
+import { IQuery } from 'src/dto/query'
 
-export class UpdateBookingDto {
+export class GetBookingDto extends IQuery {
   @IsNumber()
   @IsOptional()
   userId: number
@@ -9,10 +10,6 @@ export class UpdateBookingDto {
   @IsNumber()
   @IsOptional()
   tourId: number
-
-  @IsString()
-  @IsOptional()
-  bookingDate: string
 
   @IsEnum(Status)
   @IsOptional()

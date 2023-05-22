@@ -1,26 +1,66 @@
-import { Injectable } from '@nestjs/common';
-import { CreateReviewDto } from './dto/create-review.dto';
-import { UpdateReviewDto } from './dto/update-review.dto';
+import { Injectable } from '@nestjs/common'
+import { CreateReviewDto } from './dto/create-review.dto'
+import { UpdateReviewDto } from './dto/update-review.dto'
+import { PrismaService } from '../prisma/prisma.service'
+import { GetReviewDto } from './dto/get-review.dto'
 
 @Injectable()
 export class ReviewsService {
-  create(createReviewDto: CreateReviewDto) {
-    return 'This action adds a new review';
+  constructor(private prisma: PrismaService) {}
+
+  async create(createReviewDto: CreateReviewDto) {
+    return await this.prisma.reviews.create({
+      data: createReviewDto
+    })
   }
 
-  findAll() {
-    return `This action returns all reviews`;
+  async findAll(query: GetReviewDto) {
+    const { page, size, userId, tourId, rating } = query
+    const skip = (page - 1) * size
+
+    const condition: any = {
+      userId: userId,
+      tourId: tourId,
+      rating: rating
+    }
+
+    const total = await this.prisma.tours.count({
+      where: condition
+    })
+
+    const data = await this.prisma.tours.findMany({
+      where: condition,
+      skip,
+      take: +size
+    })
+    return {
+      total,
+      data
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} review`;
+  async findOne(id: number) {
+    return await this.prisma.reviews.findFirst({
+      where: {
+        id: id
+      }
+    })
   }
 
-  update(id: number, updateReviewDto: UpdateReviewDto) {
-    return `This action updates a #${id} review`;
+  async update(id: number, updateReviewDto: UpdateReviewDto) {
+    return await this.prisma.reviews.update({
+      where: {
+        id: id
+      },
+      data: updateReviewDto
+    })
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} review`;
+  async remove(id: number) {
+    return await this.prisma.reviews.delete({
+      where: {
+        id: id
+      }
+    })
   }
 }

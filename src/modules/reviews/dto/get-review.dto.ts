@@ -1,6 +1,7 @@
 import { IsNumber, IsOptional, IsString } from 'class-validator'
+import { IQuery } from 'src/dto/query'
 
-export class UpdateReviewDto {
+export class GetReviewDto extends IQuery {
   @IsNumber()
   @IsOptional()
   userId: number
@@ -12,8 +13,4 @@ export class UpdateReviewDto {
   @IsString()
   @IsOptional()
   rating: string
-
-  @IsString()
-  @IsOptional()
-  comment: string
 }

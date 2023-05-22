@@ -8,6 +8,9 @@ import { AuthModule } from './modules/auth/auth.module'
 import { PrismaModule } from './modules/prisma/prisma.module'
 import { UserModule } from './modules/user/user.module'
 import { ToursModule } from './modules/tours/tours.module'
+import { BookingsModule } from './modules/bookings/bookings.module'
+import { ReviewsModule } from './modules/reviews/reviews.module'
+import { CategoriesModule } from './modules/categories/categories.module'
 
 @Module({
   imports: [
@@ -18,7 +21,10 @@ import { ToursModule } from './modules/tours/tours.module'
     PrismaModule,
     UserModule,
     AuthModule,
-    ToursModule
+    ToursModule,
+    BookingsModule,
+    ReviewsModule,
+    CategoriesModule
   ],
   controllers: [AppController],
   providers: [AppService]
