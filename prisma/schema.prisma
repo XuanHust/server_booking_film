@@ -62,6 +62,7 @@ model Reviews {
 
 model Movies {
   id  Int @id @default(autoincrement())
+  cinemaId Int
   title  String
   genre String
   banner String?
@@ -70,6 +71,8 @@ model Movies {
   duration Int
   trailer   String
   createdAt   DateTime  @default(now())
+
+  cinemas Cinemas? @relation(fields: [cinemaId], references: [id], map: "cinema_key")
 
   screenings Screenings[]
   reviews Reviews[]
@@ -82,7 +85,8 @@ model Cinemas {
   address String
   city String
   createdAt   DateTime  @default(now())
-
+  
+  movies  Movies[]
   screenings Screenings[]
 }
 
