@@ -43,6 +43,7 @@ model User {
 
 model Tours {
   id          Int      @id @default(autoincrement())
+  cateId      Int
   tourName    String
   description String   @db.LongText
   startDate   DateTime
@@ -50,8 +51,18 @@ model Tours {
   price       Decimal
   capacity    Int
 
+  categories Categories? @relation(fields: [cateId], references: [id], map: "CategoryId_key")
+
   reviews  Reviews[]
   bookings Bookings[]
+}
+
+model Categories {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String   @db.LongText
+
+  tours  Tours[]
 }
 
 model Bookings {
