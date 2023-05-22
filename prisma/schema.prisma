@@ -50,6 +50,9 @@ model Tours {
   endDate     DateTime
   price       Decimal
   capacity    Int
+  rate  Float?
+
+  createdAt   DateTime  @default(now())
 
   categories Categories? @relation(fields: [cateId], references: [id], map: "CategoryId_key")
 
@@ -62,6 +65,8 @@ model Categories {
   name        String
   description String   @db.LongText
 
+  createdAt   DateTime  @default(now())
+
   tours  Tours[]
 }
 
@@ -72,6 +77,8 @@ model Bookings {
   bookingDate DateTime @default(now())
   status      Status   @default(WATING)
 
+  createdAt   DateTime  @default(now())
+
   tours Tours? @relation(fields: [tourId], references: [id], map: "Bookings_tours_key")
   user  User?  @relation(fields: [userId], references: [id], map: "Bookings_user_key")
 }
@@ -80,8 +87,10 @@ model Reviews {
   id      Int    @id @default(autoincrement())
   userId  Int
   tourId  Int
-  rating  String
+  rating  Int
   comment String
+
+  createdAt   DateTime  @default(now())
 
   tours Tours? @relation(fields: [tourId], references: [id], map: "Reviews_tours_key")
   user  User?  @relation(fields: [userId], references: [id], map: "Reviews_user_key")

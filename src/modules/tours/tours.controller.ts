@@ -36,4 +36,9 @@ export class ToursController {
   remove(@Param('id') id: string) {
     return this.toursService.remove(+id)
   }
+
+  @Get('lastTour')
+  findLastTour() {
+    return this.toursService.findLastTour()
+  }
 }

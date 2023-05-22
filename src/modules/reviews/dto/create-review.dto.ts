@@ -9,9 +9,9 @@ export class CreateReviewDto {
   @IsNotEmpty()
   tourId: number
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
-  rating: string
+  rating: number
 
   @IsString()
   @IsNotEmpty()

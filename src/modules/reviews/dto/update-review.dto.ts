@@ -9,9 +9,9 @@ export class UpdateReviewDto {
   @IsOptional()
   tourId: number
 
-  @IsString()
+  @IsNumber()
   @IsOptional()
-  rating: string
+  rating: number
 
   @IsString()
   @IsOptional()

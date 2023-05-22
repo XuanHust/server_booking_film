@@ -10,7 +10,7 @@ export class GetReviewDto extends IQuery {
   @IsOptional()
   tourId: number
 
-  @IsString()
+  @IsNumber()
   @IsOptional()
-  rating: string
+  rating: number
 }

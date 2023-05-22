@@ -3,6 +3,7 @@ import { CreateTourDto } from './dto/create-tour.dto'
 import { UpdateTourDto } from './dto/update-tour.dto'
 import { PrismaService } from '../prisma/prisma.service'
 import { GetTourDto } from './dto/get-tour.dto'
+import { Tours } from '@prisma/client'
 
 @Injectable()
 export class ToursService {
@@ -45,12 +46,22 @@ export class ToursService {
 
     const data = await this.prisma.tours.findMany({
       where: condition,
+      include: {
+        reviews: true
+      },
       skip,
       take: +size
     })
+    const newData: Tours[] = data.map((item) => ({
+      ...item,
+      rate:
+        item.reviews.reduce((accumulator, currentObject) => {
+          return accumulator + currentObject.rating
+        }, 0) / item.reviews.length
+    }))
     return {
       total,
-      data
+      newData
     }
   }
 
@@ -81,5 +92,39 @@ export class ToursService {
         id: id
       }
     })
+  }
+
+  async findLastTour() {
+    const page = 1
+    const size = 10
+    const skip = (page - 1) * size
+
+    const total = await this.prisma.tours.count({
+      orderBy: {
+        createdAt: 'desc'
+      }
+    })
+
+    const data = await this.prisma.tours.findMany({
+      orderBy: {
+        createdAt: 'desc'
+      },
+      include: {
+        reviews: true
+      },
+      skip,
+      take: +size
+    })
+    const newData: Tours[] = data.map((item) => ({
+      ...item,
+      rate:
+        item.reviews.reduce((accumulator, currentObject) => {
+          return accumulator + currentObject.rating
+        }, 0) / item.reviews.length
+    }))
+    return {
+      total,
+      newData
+    }
   }
 }
