@@ -41,4 +41,9 @@ export class MoviesController {
   deleteMovie(@Param('id') id: number) {
     return this.moviesService.deleteMovie(id)
   }
+
+  @Get('bookingest')
+  getMoviesBooingest() {
+    return this.moviesService.getMoviesBooingest()
+  }
 }
