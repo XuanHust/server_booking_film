@@ -36,11 +36,11 @@ export class CategoriesService {
       }
     }
 
-    const total = await this.prisma.tours.count({
+    const total = await this.prisma.categories.count({
       where: condition
     })
 
-    const data = await this.prisma.tours.findMany({
+    const data = await this.prisma.categories.findMany({
       where: condition,
       skip,
       take: +size
