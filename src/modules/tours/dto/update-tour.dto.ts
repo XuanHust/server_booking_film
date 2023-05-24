@@ -15,6 +15,14 @@ export class UpdateTourDto {
 
   @IsString()
   @IsOptional()
+  banner: string
+
+  @IsString()
+  @IsOptional()
+  poster: string
+
+  @IsString()
+  @IsOptional()
   endDate: string
 
   @IsNumber()

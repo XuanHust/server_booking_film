@@ -17,6 +17,14 @@ export class CreateTourDto {
   @IsNotEmpty()
   endDate: string
 
+  @IsString()
+  @IsNotEmpty()
+  banner: string
+
+  @IsString()
+  @IsNotEmpty()
+  poster: string
+
   @IsNumber()
   @IsNotEmpty()
   price: number

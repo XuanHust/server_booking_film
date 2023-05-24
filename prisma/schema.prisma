@@ -45,9 +45,11 @@ model Tours {
   id          Int      @id @default(autoincrement())
   cateId      Int
   tourName    String
+  banner      String
+  poster      String
   description String   @db.LongText
-  startDate   DateTime
-  endDate     DateTime
+  startDate   String
+  endDate     String
   price       Decimal
   capacity    Int
   rate  Float?
