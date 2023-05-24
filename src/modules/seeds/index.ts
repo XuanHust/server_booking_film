@@ -1,6 +1,6 @@
 import { PrismaService } from '../prisma/prisma.service'
 import { BaseSeed } from './common/base.seed'
-import UserAdminSeed from './data/user-admin.json'
+import { UserAdminSeed } from './user-admin.seed'
 
 export class SeedService {
   private prisma = PrismaService.getInstance()
