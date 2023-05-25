@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
+import { IsNotEmpty, IsNumber, IsString, IsOptional } from 'class-validator'
 
 export class CreateTourDto {
   @IsString()
@@ -18,11 +18,11 @@ export class CreateTourDto {
   endDate: string
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   banner: string
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   poster: string
 
   @IsNumber()
@@ -32,4 +32,8 @@ export class CreateTourDto {
   @IsNumber()
   @IsNotEmpty()
   capacity: number
+
+  @IsNumber()
+  @IsNotEmpty()
+  cateId: number
 }
