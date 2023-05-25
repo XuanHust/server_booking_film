@@ -28,4 +28,8 @@ export class CreateMovieDto {
   @IsString()
   @IsNotEmpty()
   poster: string
+
+  @IsString()
+  @IsNotEmpty()
+  cinemaId: number
 }
