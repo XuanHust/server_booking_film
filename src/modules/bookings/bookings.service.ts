@@ -47,6 +47,29 @@ export class BookingsService {
     })
   }
 
+  async getMoviesBooingest() {
+    const page = 1
+    const size = 10
+    const skip = (page - 1) * size
+
+    const data = await this.prisma.tours.findMany({
+      include: {
+        bookings: true
+      },
+      skip,
+      take: +size
+    })
+    const newDataBookingest = data
+      .map((item) => ({
+        ...item,
+        numberBooking: item.bookings.length
+      }))
+      .sort((ob1, ob2) => ob2.numberBooking - ob1.numberBooking)
+    return {
+      data: newDataBookingest
+    }
+  }
+
   async update(id: number, updateBookingDto: UpdateBookingDto) {
     return await this.prisma.bookings.update({
       where: {
