@@ -10,7 +10,7 @@ export class BookingsController {
   constructor(private readonly bookingsService: BookingsService) {}
 
   @Post()
-  @UseGuards(AccessTokenGuard)
+  // @UseGuards(AccessTokenGuard)
   create(@Body() createBookingDto: CreateBookingDto) {
     return this.bookingsService.create(createBookingDto)
   }
@@ -18,6 +18,11 @@ export class BookingsController {
   @Get()
   findAll(@Query() query: GetBookingDto) {
     return this.bookingsService.findAll(query)
+  }
+
+  @Get('/MoviesBooingest')
+  getMoviesBooingest() {
+    return this.bookingsService.getMoviesBooingest()
   }
 
   @Get(':id')

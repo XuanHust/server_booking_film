@@ -24,11 +24,15 @@ export class ReviewsService {
       rating: rating
     }
 
-    const total = await this.prisma.tours.count({
+    const total = await this.prisma.reviews.count({
       where: condition
     })
 
-    const data = await this.prisma.tours.findMany({
+    const data = await this.prisma.reviews.findMany({
+      include: {
+        user: true,
+        tours: true
+      },
       where: condition,
       skip,
       take: +size

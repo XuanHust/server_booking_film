@@ -10,7 +10,7 @@ export class ReviewsController {
   constructor(private readonly reviewsService: ReviewsService) {}
 
   @Post()
-  @UseGuards(AccessTokenGuard)
+  // @UseGuards(AccessTokenGuard)
   create(@Body() createReviewDto: CreateReviewDto) {
     return this.reviewsService.create(createReviewDto)
   }

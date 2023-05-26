@@ -24,11 +24,11 @@ export class BookingsService {
       status: status
     }
 
-    const total = await this.prisma.tours.count({
+    const total = await this.prisma.bookings.count({
       where: condition
     })
 
-    const data = await this.prisma.tours.findMany({
+    const data = await this.prisma.bookings.findMany({
       where: condition,
       skip,
       take: +size
@@ -43,6 +43,10 @@ export class BookingsService {
     return await this.prisma.bookings.findFirst({
       where: {
         id: id
+      },
+      include: {
+        tours: true,
+        user: true
       }
     })
   }
