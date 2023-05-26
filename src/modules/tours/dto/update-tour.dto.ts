@@ -1,4 +1,4 @@
-import { IsNumber, IsOptional, IsString } from 'class-validator'
+import { IsNumber, IsOptional, IsString, IsNotEmpty } from 'class-validator'
 
 export class UpdateTourDto {
   @IsString()
@@ -32,4 +32,8 @@ export class UpdateTourDto {
   @IsNumber()
   @IsOptional()
   capacity: number
+  
+  @IsNumber()
+  @IsNotEmpty()
+  cateId: number
 }

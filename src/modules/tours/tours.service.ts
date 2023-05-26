@@ -124,7 +124,7 @@ export class ToursService {
     }))
     return {
       total,
-      newData
+      data: newData
     }
   }
 }
