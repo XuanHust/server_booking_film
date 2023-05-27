@@ -10,10 +10,6 @@ export class CreateBookingDto {
   @IsNotEmpty()
   tourId: number
 
-  @IsString()
-  @IsNotEmpty()
-  bookingDate: string
-
   @IsEnum(Status)
   @IsNotEmpty()
   status: Status

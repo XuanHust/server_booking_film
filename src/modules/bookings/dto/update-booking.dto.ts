@@ -10,10 +10,6 @@ export class UpdateBookingDto {
   @IsOptional()
   tourId: number
 
-  @IsString()
-  @IsOptional()
-  bookingDate: string
-
   @IsEnum(Status)
   @IsOptional()
   status: Status

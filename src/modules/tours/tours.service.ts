@@ -9,9 +9,19 @@ import { Tours } from '@prisma/client'
 export class ToursService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createTourDto: CreateTourDto) {
+  async create(
+    createTourDto: CreateTourDto,
+    files: {
+      poster?: Express.Multer.File[]
+      banner?: Express.Multer.File[]
+    }
+  ) {
     return await this.prisma.tours.create({
-      data: createTourDto
+      data: {
+        ...createTourDto,
+        banner: files.banner[0].filename,
+        poster: files.poster[0].filename
+      }
     })
   }
 
@@ -66,7 +76,7 @@ export class ToursService {
   }
 
   async findOne(id: number) {
-    return await this.prisma.tours.findFirst({
+    const data = await this.prisma.tours.findFirst({
       where: {
         id: id
       },
@@ -75,14 +85,33 @@ export class ToursService {
         bookings: true
       }
     })
+    const newData: Tours = {
+      ...data,
+      rate:
+        data.reviews.reduce((accumulator, currentObject) => {
+          return accumulator + currentObject.rating
+        }, 0) / data.reviews.length
+    }
+    return newData
   }
 
-  async update(id: number, updateTourDto: UpdateTourDto) {
+  async update(
+    id: number,
+    updateTourDto: UpdateTourDto,
+    files?: {
+      poster?: Express.Multer.File[]
+      banner?: Express.Multer.File[]
+    }
+  ) {
     return await this.prisma.tours.update({
       where: {
         id: id
       },
-      data: updateTourDto
+      data: {
+        ...updateTourDto,
+        banner: files.banner[0].filename,
+        poster: files.poster[0].filename
+      }
     })
   }
 

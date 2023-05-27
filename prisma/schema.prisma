@@ -16,9 +16,10 @@ enum UserRole {
 }
 
 enum Status {
-  WATING
-  ACCEPTED
-  CANCELED
+  DADAT
+  DAXACNHAN
+  HUYTOUR
+  DAHOANTHANHTOUR
 }
 
 model User {
@@ -77,7 +78,7 @@ model Bookings {
   userId      Int
   tourId      Int
   bookingDate DateTime @default(now())
-  status      Status   @default(WATING)
+  status      Status   @default(DADAT)
 
   createdAt   DateTime  @default(now())
 

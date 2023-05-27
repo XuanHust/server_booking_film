@@ -3,6 +3,7 @@ import { CreateCategoryDto } from './dto/create-category.dto'
 import { UpdateCategoryDto } from './dto/update-category.dto'
 import { PrismaService } from '../prisma/prisma.service'
 import { GetCategoryDto } from './dto/get-category.dto'
+import { Categories } from '@prisma/client'
 
 @Injectable()
 export class CategoriesService {
@@ -52,14 +53,28 @@ export class CategoriesService {
   }
 
   async findOne(id: number) {
-    return await this.prisma.categories.findFirst({
+    const data = await this.prisma.categories.findFirst({
       where: {
         id: id
       },
       include: {
-        tours: true
+        tours: {
+          include: {
+            reviews: true
+          }
+        }
       }
     })
+
+    const newData = data.tours.map((item) => ({
+      ...item,
+      rate:
+        item.reviews.reduce((accumulator, currentObject) => {
+          return accumulator + currentObject.rating
+        }, 0) / item.reviews.length
+    }))
+
+    return newData
   }
 
   async update(id: number, updateCategoryDto: UpdateCategoryDto) {
