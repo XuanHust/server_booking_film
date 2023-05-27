@@ -44,6 +44,7 @@ model User {
 
 model Tours {
   id          Int      @id @default(autoincrement())
+  code        String?
   cateId      Int
   tourName    String
   banner      String
@@ -54,6 +55,9 @@ model Tours {
   price       Decimal
   capacity    Int
   rate  Float?
+  listLocation  String?   @db.LongText
+  transport   String?
+  startLocation  String?
 
   createdAt   DateTime  @default(now())
 
@@ -79,6 +83,7 @@ model Bookings {
   tourId      Int
   bookingDate DateTime @default(now())
   status      Status   @default(DADAT)
+  totalPrice  Decimal?
 
   createdAt   DateTime  @default(now())
 

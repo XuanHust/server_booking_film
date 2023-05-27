@@ -15,13 +15,39 @@ export class ReviewsService {
   }
 
   async findAll(query: GetReviewDto) {
-    const { page, size, userId, tourId, rating } = query
+    const { page, _q, size, userId, tourId, rating } = query
     const skip = (page - 1) * size
 
     const condition: any = {
       userId: userId,
       tourId: tourId,
       rating: rating
+    }
+
+    if (_q) {
+      condition['OR'] = {
+        OR: [
+          {
+            include: {
+              user: {
+                contain: _q
+              }
+            }
+          },
+          {
+            include: {
+              tours: {
+                contain: _q
+              }
+            }
+          },
+          {
+            comment: {
+              contain: _q
+            }
+          }
+        ]
+      }
     }
 
     const total = await this.prisma.reviews.count({

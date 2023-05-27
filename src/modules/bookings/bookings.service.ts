@@ -15,13 +15,39 @@ export class BookingsService {
   }
 
   async findAll(query: GetBookingDto) {
-    const { page, size, userId, tourId, status } = query
+    const { page, _q, size, userId, tourId, status } = query
     const skip = (page - 1) * size
 
     const condition: any = {
       userId: userId,
       tourId: tourId,
       status: status
+    }
+
+    if (_q) {
+      condition['OR'] = {
+        OR: [
+          {
+            include: {
+              user: {
+                contain: _q
+              }
+            }
+          },
+          {
+            include: {
+              tours: {
+                contain: _q
+              }
+            }
+          },
+          {
+            comment: {
+              contain: _q
+            }
+          }
+        ]
+      }
     }
 
     const total = await this.prisma.bookings.count({
