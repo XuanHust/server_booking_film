@@ -31,7 +31,11 @@ export class BookingsService {
     const data = await this.prisma.bookings.findMany({
       where: condition,
       skip,
-      take: +size
+      take: +size,
+      include: {
+        user: true,
+        tours: true
+      }
     })
     return {
       total,
