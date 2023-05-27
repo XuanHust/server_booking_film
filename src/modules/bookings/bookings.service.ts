@@ -30,14 +30,18 @@ export class BookingsService {
           {
             include: {
               user: {
-                contain: _q
+                name: {
+                  contain: _q
+                }
               }
             }
           },
           {
             include: {
               tours: {
-                contain: _q
+                tourName: {
+                  contain: _q
+                }
               }
             }
           },
