@@ -16,5 +16,5 @@ export class CreateBookingDto {
 
   @IsNumber()
   @IsNotEmpty()
-  totalPrice: number 
+  totalPrice: number
 }
