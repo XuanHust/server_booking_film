@@ -13,4 +13,8 @@ export class CreateBookingDto {
   @IsEnum(Status)
   @IsNotEmpty()
   status: Status
+
+  @IsNumber()
+  @IsNotEmpty()
+  totalPrice: number 
 }

@@ -32,8 +32,24 @@ export class UpdateTourDto {
   @IsNumber()
   @IsOptional()
   capacity: number
-  
+
   @IsNumber()
   @IsNotEmpty()
   cateId: number
+
+  @IsString()
+  @IsNotEmpty()
+  code: string
+
+  @IsString()
+  @IsNotEmpty()
+  transport: string
+
+  @IsString()
+  @IsNotEmpty()
+  listLocation: string
+
+  @IsString()
+  @IsNotEmpty()
+  startLocation: string
 }

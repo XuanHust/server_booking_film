@@ -36,4 +36,20 @@ export class CreateTourDto {
   @IsNumber()
   @IsNotEmpty()
   cateId: number
+
+  @IsString()
+  @IsNotEmpty()
+  code: string
+
+  @IsString()
+  @IsNotEmpty()
+  transport: string
+
+  @IsString()
+  @IsNotEmpty()
+  listLocation: string
+
+  @IsString()
+  @IsNotEmpty()
+  startLocation: string
 }

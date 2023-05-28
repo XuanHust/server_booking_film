@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
+import { IsNotEmpty, IsNumber, IsString, IsOptional } from 'class-validator'
 
 export class CreateReviewDto {
   @IsNumber()
@@ -10,7 +10,7 @@ export class CreateReviewDto {
   tourId: number
 
   @IsNumber()
-  @IsNotEmpty()
+  @IsOptional()
   rating: number
 
   @IsString()

@@ -13,4 +13,8 @@ export class UpdateBookingDto {
   @IsEnum(Status)
   @IsOptional()
   status: Status
+
+  @IsNumber()
+  @IsOptional()
+  totalPrice: number
 }
