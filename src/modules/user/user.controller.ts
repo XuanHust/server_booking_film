@@ -54,7 +54,7 @@ export class UserController {
   }
 
   @Get(':id')
-  @UseGuards(AccessTokenGuard)
+  // @UseGuards(AccessTokenGuard)
   getUserById(@Param('id') id: number) {
     return this.userService.findById(id)
   }
