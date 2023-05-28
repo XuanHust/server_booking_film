@@ -8,8 +8,20 @@ import { GetMovieDto } from './dto/get-movies.dto'
 export class MoviesService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createMovieDto: CreateMovieDto) {
-    return await this.prisma.movies.create({ data: createMovieDto })
+  async create(
+    createMovieDto: CreateMovieDto,
+    files: {
+      poster?: Express.Multer.File[]
+      banner?: Express.Multer.File[]
+    }
+  ) {
+    return await this.prisma.movies.create({
+      data: {
+        ...createMovieDto,
+        banner: files.banner[0].filename,
+        poster: files.poster[0].filename
+      }
+    })
   }
 
   async getMovie(id: number) {
@@ -88,7 +100,14 @@ export class MoviesService {
     }
   }
 
-  async editMovie(id: number, editMovieDto: EditMovieDto) {
+  async editMovie(
+    id: number,
+    editMovieDto: EditMovieDto,
+    files?: {
+      poster?: Express.Multer.File[]
+      banner?: Express.Multer.File[]
+    }
+  ) {
     const exist = !!(await this.prisma.movies.count({ where: { id: id } }))
     if (!exist) {
       throw new BadRequestException('Có lỗi xảy ra!')
@@ -97,7 +116,11 @@ export class MoviesService {
       where: {
         id
       },
-      data: editMovieDto
+      data: {
+        ...editMovieDto,
+        banner: files.banner[0].filename,
+        poster: files.poster[0].filename
+      }
     })
   }
 

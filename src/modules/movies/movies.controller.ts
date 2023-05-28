@@ -4,6 +4,11 @@ import { CreateMovieDto } from './dto/create-movies.dto'
 import { EditMovieDto } from './dto/edit-movies.dto'
 import { GetMovieDto } from './dto/get-movies.dto'
 import { MoviesService } from './movies.service'
+import { UseInterceptors } from '@nestjs/common'
+import { FileFieldsInterceptor } from '@nestjs/platform-express'
+import { diskStorage } from 'multer'
+import { extname } from 'path'
+import { UploadedFiles } from '@nestjs/common'
 
 @Controller({
   path: '/movies',
@@ -14,8 +19,30 @@ export class MoviesController {
 
   @Post()
   @UseGuards(AccessTokenGuard)
-  create(@Body() createMovieDto: CreateMovieDto) {
-    return this.moviesService.create(createMovieDto)
+  @UseInterceptors(
+    FileFieldsInterceptor(
+      [
+        { name: 'banner', maxCount: 1 },
+        { name: 'poster', maxCount: 1 }
+      ],
+      {
+        storage: diskStorage({
+          destination: './files',
+          filename(req, file, callback) {
+            const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9)
+            const ext = extname(file.originalname)
+            const fileName = `${uniqueSuffix}${ext}`
+            callback(null, fileName)
+          }
+        })
+      }
+    )
+  )
+  create(
+    @UploadedFiles() files: { banner?: Express.Multer.File[]; poster?: Express.Multer.File[] },
+    @Body() createMovieDto: CreateMovieDto
+  ) {
+    return this.moviesService.create(createMovieDto, files)
   }
 
   // @Get(':id')
@@ -32,8 +59,31 @@ export class MoviesController {
 
   @Put(':id')
   @UseGuards(AccessTokenGuard)
-  editMovie(@Param('id') id: number, @Body() editMovieDto: EditMovieDto) {
-    return this.moviesService.editMovie(id, editMovieDto)
+  @UseInterceptors(
+    FileFieldsInterceptor(
+      [
+        { name: 'banner', maxCount: 1 },
+        { name: 'poster', maxCount: 1 }
+      ],
+      {
+        storage: diskStorage({
+          destination: './files',
+          filename(req, file, callback) {
+            const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9)
+            const ext = extname(file.originalname)
+            const fileName = `${uniqueSuffix}${ext}`
+            callback(null, fileName)
+          }
+        })
+      }
+    )
+  )
+  editMovie(
+    @UploadedFiles() files: { banner?: Express.Multer.File[]; poster?: Express.Multer.File[] },
+    @Param('id') id: number,
+    @Body() editMovieDto: EditMovieDto
+  ) {
+    return this.moviesService.editMovie(id, editMovieDto, files)
   }
 
   @Delete('delete/:id')
