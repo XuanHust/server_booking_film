@@ -18,6 +18,7 @@ enum UserRole {
 enum Status {
   DADAT
   DAXACNHAN
+	DANGDITOUR
   HUYTOUR
   DAHOANTHANHTOUR
 }
@@ -58,6 +59,7 @@ model Tours {
   listLocation  String?   @db.LongText
   transport   String?
   startLocation  String?
+	listDate   String?   @db.LongText
 
   createdAt   DateTime  @default(now())
 
