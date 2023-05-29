@@ -52,4 +52,8 @@ export class UpdateTourDto {
   @IsString()
   @IsNotEmpty()
   startLocation: string
+
+  @IsString()
+  @IsNotEmpty()
+  listDate: string
 }
