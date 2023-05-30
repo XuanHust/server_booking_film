@@ -17,4 +17,8 @@ export class CreateBookingDto {
   @IsNumber()
   @IsNotEmpty()
   totalPrice: number
+
+  @IsString()
+  @IsNotEmpty()
+  bookingDate: string
 }

@@ -17,4 +17,8 @@ export class UpdateBookingDto {
   @IsNumber()
   @IsOptional()
   totalPrice: number
+
+  @IsString()
+  @IsOptional()
+  bookingDate: string
 }
