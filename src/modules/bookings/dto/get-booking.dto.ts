@@ -1,4 +1,4 @@
-import { IsNumber, IsOptional } from 'class-validator'
+import { IsEnum, IsNumber, IsOptional } from 'class-validator'
 import { IQuery } from 'src/dto/query'
 import { Status } from '@prisma/client'
 
