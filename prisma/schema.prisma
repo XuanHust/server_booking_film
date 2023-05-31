@@ -14,6 +14,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Status {
+  DADAT
+  DAXACNHAN
+	DANGXEMPHIM
+  HUYTOUR
+  DAHOANTHANH
+}
+
 enum UserRole {
   ADMIN
   USER
@@ -34,6 +42,7 @@ model User {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime? @updatedAt
   hashedRt    String?
+	dateBooking String?
 
   bookings Bookings[]
   reviews  Reviews[]
@@ -44,6 +53,9 @@ model Bookings {
   userId Int
   movieId Int
   createdAt   DateTime  @default(now())
+	status      Status   @default(DADAT)
+	bookingDate String?
+	totalPrice Decimal?
 
   user User? @relation(fields: [userId], references: [id], map: "User_booking_key")
   movies Movies? @relation(fields: [movieId], references: [id], map: "Bookings_movies_key")

@@ -15,12 +15,13 @@ export class BookingsService {
   }
 
   async findAll(query: GetBookingDto) {
-    const { page, size, movieId, userId } = query
+    const { page, size, movieId, userId, status } = query
     const skip = (page - 1) * size
 
     const condition: any = {
       movieId: movieId,
-      userId: userId
+      userId: userId,
+      status: status
     }
 
     const total = await this.prisma.bookings.count({
@@ -30,7 +31,11 @@ export class BookingsService {
     const data = await this.prisma.bookings.findMany({
       where: condition,
       skip,
-      take: +size
+      take: +size,
+      include: {
+        user: true,
+        movies: true
+      }
     })
     return {
       total,
@@ -42,6 +47,10 @@ export class BookingsService {
     return await this.prisma.bookings.findFirst({
       where: {
         id: id
+      },
+      include: {
+        user: true,
+        movies: true
       }
     })
   }
