@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator'
 
 export class CreateMovieDto {
   @IsString()
@@ -22,18 +22,22 @@ export class CreateMovieDto {
   duration: number
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   banner: string
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   poster: string
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
   cinemaId: number
 
   @IsString()
   @IsNotEmpty()
   descristion: string
+
+  @IsNumber()
+  @IsNotEmpty()
+  price: number
 }

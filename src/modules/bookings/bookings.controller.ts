@@ -16,13 +16,13 @@ export class BookingsController {
   }
 
   @Get()
-  @UseGuards(AccessTokenGuard)
+  // @UseGuards(AccessTokenGuard)
   findAll(@Query() query: GetBookingDto) {
     return this.bookingsService.findAll(query)
   }
 
   @Get(':id')
-  @UseGuards(AccessTokenGuard)
+  // @UseGuards(AccessTokenGuard)
   findOne(@Param('id') id: string) {
     return this.bookingsService.findOne(+id)
   }

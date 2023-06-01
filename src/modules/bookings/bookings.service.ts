@@ -43,18 +43,6 @@ export class BookingsService {
     }
   }
 
-  async findOne(id: number) {
-    return await this.prisma.bookings.findFirst({
-      where: {
-        id: id
-      },
-      include: {
-        user: true,
-        movies: true
-      }
-    })
-  }
-
   async update(id: number, updateBookingDto: UpdateBookingDto) {
     return await this.prisma.bookings.update({
       where: {
@@ -68,6 +56,18 @@ export class BookingsService {
     return await this.prisma.bookings.delete({
       where: {
         id: id
+      }
+    })
+  }
+
+  async findOne(id: number) {
+    return await this.prisma.bookings.findFirst({
+      where: {
+        id: id
+      },
+      include: {
+        user: true,
+        movies: true
       }
     })
   }

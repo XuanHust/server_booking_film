@@ -12,4 +12,8 @@ export class CreateScreeningDto {
   @IsString()
   @IsNotEmpty()
   startTime: string
+
+  @IsString()
+  @IsNotEmpty()
+  endTime: string
 }

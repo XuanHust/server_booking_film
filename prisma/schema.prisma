@@ -83,6 +83,7 @@ model Movies {
   director String
   duration Int
   trailer   String
+	price Int
   createdAt   DateTime  @default(now())
 
   cinemas Cinemas? @relation(fields: [cinemaId], references: [id], map: "cinema_key")
@@ -107,7 +108,8 @@ model Screenings {
   id  Int @id @default(autoincrement()) 
   movieId Int 
   cinemaId Int
-  startTime DateTime
+  startTime String
+	endTime String
   createdAt   DateTime  @default(now())
 
   movies Movies? @relation(fields: [movieId], references: [id], map: "Screening_movies_key")

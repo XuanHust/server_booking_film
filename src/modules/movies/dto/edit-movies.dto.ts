@@ -32,4 +32,12 @@ export class EditMovieDto {
   @IsString()
   @IsNotEmpty()
   descristion: string
+
+  @IsNumber()
+  @IsNotEmpty()
+  cinemaId: number
+
+  @IsNumber()
+  @IsNotEmpty()
+  price: number
 }
