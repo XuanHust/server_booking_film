@@ -25,7 +25,7 @@ export class MoviesService {
   }
 
   async getMovie(id: number) {
-    return await this.prisma.movies.findUnique({
+    return await this.prisma.movies.findFirst({
       where: {
         id
       },
@@ -96,7 +96,7 @@ export class MoviesService {
       }))
       .sort((ob1, ob2) => ob2.numberBooking - ob1.numberBooking)
     return {
-      newDataBookingest
+      data: newDataBookingest
     }
   }
 

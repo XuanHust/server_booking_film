@@ -32,4 +32,8 @@ export class CreateMovieDto {
   @IsString()
   @IsNotEmpty()
   cinemaId: number
+
+  @IsString()
+  @IsNotEmpty()
+  descristion: string
 }

@@ -76,6 +76,7 @@ model Movies {
   id  Int @id @default(autoincrement())
   cinemaId Int?
   title  String
+  descristion String?     @db.LongText
   genre String
   banner String?
   poster String?

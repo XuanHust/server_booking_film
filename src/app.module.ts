@@ -12,6 +12,7 @@ import { CinemasModule } from './modules/cinemas/cinemas.module'
 import { ScreeningsModule } from './modules/screenings/screenings.module'
 import { TicketsModule } from './modules/tickets/tickets.module'
 import { BookingsModule } from './modules/bookings/bookings.module'
+import { ReviewsModule } from './modules/reviews/reviews.module'
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { BookingsModule } from './modules/bookings/bookings.module'
     UserModule,
     AuthModule,
     MoviesModule,
+    ReviewsModule,
     CinemasModule,
     ScreeningsModule,
     TicketsModule,

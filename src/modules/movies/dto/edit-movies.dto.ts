@@ -1,4 +1,4 @@
-import { IsNumber, IsOptional, IsString } from 'class-validator'
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator'
 
 export class EditMovieDto {
   @IsString()
@@ -28,4 +28,8 @@ export class EditMovieDto {
   @IsString()
   @IsOptional()
   poster: string
+
+  @IsString()
+  @IsNotEmpty()
+  descristion: string
 }

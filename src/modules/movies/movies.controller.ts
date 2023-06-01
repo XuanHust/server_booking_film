@@ -45,10 +45,15 @@ export class MoviesController {
     return this.moviesService.create(createMovieDto, files)
   }
 
-  // @Get(':id')
-  @UseGuards(AccessTokenGuard)
-  getMovie(@Param('id') id: number) {
-    return this.moviesService.getMovie(id)
+  @Get('/bookingest')
+  getMoviesBooingest() {
+    return this.moviesService.getMoviesBooingest()
+  }
+
+  @Get(':id')
+  // @UseGuards(AccessTokenGuard)
+  getMovie(@Param('id') id: string) {
+    return this.moviesService.getMovie(+id)
   }
 
   @Get()
@@ -90,10 +95,5 @@ export class MoviesController {
   @UseGuards(AccessTokenGuard)
   deleteMovie(@Param('id') id: number) {
     return this.moviesService.deleteMovie(id)
-  }
-
-  @Get('bookingest')
-  getMoviesBooingest() {
-    return this.moviesService.getMoviesBooingest()
   }
 }
