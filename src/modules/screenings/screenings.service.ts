@@ -24,13 +24,14 @@ export class ScreeningsService {
   }
 
   async getScreenings(query: GetScreeningDto) {
-    const { page, size, movieId, cinemaId, startTime } = query
+    const { page, size, movieId, cinemaId, startTime, name } = query
     const skip = (page - 1) * size
 
     const condition: any = {
       movieId: movieId,
       cinemaId: cinemaId,
-      startTime: startTime
+      startTime: startTime,
+      name: name
     }
 
     const total = await this.prisma.screenings.count({

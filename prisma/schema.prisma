@@ -106,6 +106,7 @@ model Cinemas {
 
 model Screenings {
   id  Int @id @default(autoincrement()) 
+  name String
   movieId Int 
   cinemaId Int
   startTime String

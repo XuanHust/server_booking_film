@@ -5,6 +5,10 @@ export class CreateScreeningDto {
   @IsNotEmpty()
   movieId: number
 
+  @IsString()
+  @IsNotEmpty()
+  name: string
+
   @IsNumber()
   @IsNotEmpty()
   cinemaId: number
