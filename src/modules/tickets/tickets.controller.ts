@@ -18,8 +18,8 @@ export class TicketsController {
     return this.ticketsService.create(createTicketDto)
   }
 
-  // @Get(':id')
-  @UseGuards(AccessTokenGuard)
+  @Get(':id')
+  // @UseGuards(AccessTokenGuard)
   getTicket(@Param('id') id: number) {
     return this.ticketsService.getTicket(id)
   }

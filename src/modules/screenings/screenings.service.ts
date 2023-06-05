@@ -18,7 +18,9 @@ export class ScreeningsService {
         id
       },
       include: {
-        tickets: true
+        tickets: true,
+        movies: true,
+        cinemas: true
       }
     })
   }
@@ -41,7 +43,12 @@ export class ScreeningsService {
     const data = await this.prisma.screenings.findMany({
       where: condition,
       skip,
-      take: +size
+      take: +size,
+      include: {
+        cinemas: true,
+        movies: true,
+        tickets: true
+      }
     })
     return {
       total,

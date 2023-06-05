@@ -45,6 +45,11 @@ export class MoviesController {
     return this.moviesService.create(createMovieDto, files)
   }
 
+  @Get('/lastFilm')
+  findLastTour() {
+    return this.moviesService.findLastFilm()
+  }
+
   @Get('/bookingest')
   getMoviesBooingest() {
     return this.moviesService.getMoviesBooingest()

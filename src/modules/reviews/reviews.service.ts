@@ -29,7 +29,8 @@ export class ReviewsService {
       skip,
       take: +size,
       include: {
-        user: true
+        user: true,
+        movies: true
       }
     })
     return {

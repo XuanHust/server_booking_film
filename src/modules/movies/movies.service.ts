@@ -93,7 +93,18 @@ export class MoviesService {
     const data = await this.prisma.movies.findMany({
       where: condition,
       skip,
-      take: +size
+      take: +size,
+      include: {
+        reviews: {
+          include: {
+            user: true,
+            movies: true
+          }
+        },
+        bookings: true,
+        screenings: true,
+        cinemas: true
+      }
     })
     return {
       total,
@@ -136,5 +147,32 @@ export class MoviesService {
         id
       }
     })
+  }
+
+  async findLastFilm() {
+    const page = 1
+    const size = 10
+    const skip = (page - 1) * size
+
+    const total = await this.prisma.movies.count({
+      orderBy: {
+        createdAt: 'desc'
+      }
+    })
+
+    const data = await this.prisma.movies.findMany({
+      orderBy: {
+        createdAt: 'desc'
+      },
+      include: {
+        reviews: true
+      },
+      skip,
+      take: +size
+    })
+    return {
+      total,
+      data: data
+    }
   }
 }
