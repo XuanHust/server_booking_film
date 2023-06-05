@@ -36,8 +36,4 @@ export class CreateMovieDto {
   @IsString()
   @IsNotEmpty()
   descristion: string
-
-  @IsNumber()
-  @IsNotEmpty()
-  price: number
 }

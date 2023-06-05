@@ -36,8 +36,4 @@ export class EditMovieDto {
   @IsNumber()
   @IsNotEmpty()
   cinemaId: number
-
-  @IsNumber()
-  @IsNotEmpty()
-  price: number
 }

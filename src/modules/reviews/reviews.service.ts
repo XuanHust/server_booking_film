@@ -27,7 +27,10 @@ export class ReviewsService {
     const data = await this.prisma.reviews.findMany({
       where: condition,
       skip,
-      take: +size
+      take: +size,
+      include: {
+        user: true
+      }
     })
     return {
       total,

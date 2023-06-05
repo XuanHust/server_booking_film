@@ -59,7 +59,7 @@ model Bookings {
 	ticket String?
 	bookingDate String?
 	totalPrice Decimal?
-
+  
   user User? @relation(fields: [userId], references: [id], map: "User_booking_key")
   movies Movies? @relation(fields: [movieId], references: [id], map: "Bookings_movies_key")
 }
@@ -86,7 +86,6 @@ model Movies {
   director String
   duration Int
   trailer   String
-	price Int
   createdAt   DateTime  @default(now())
 
   cinemas Cinemas? @relation(fields: [cinemaId], references: [id], map: "cinema_key")
@@ -101,6 +100,7 @@ model Cinemas {
   name String
   address String
   city String
+  img String?
   createdAt   DateTime  @default(now())
   
   movies  Movies[]
