@@ -20,4 +20,16 @@ export class UpdateBookingDto {
   @IsString()
   @IsOptional()
   bookingDate: string
+
+  @IsString()
+  @IsOptional()
+  cinemas: string
+
+  @IsString()
+  @IsOptional()
+  ticket: string
+
+  @IsString()
+  @IsOptional()
+  screenings: string
 }

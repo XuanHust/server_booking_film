@@ -54,6 +54,9 @@ model Bookings {
   movieId Int
   createdAt   DateTime  @default(now())
 	status      Status   @default(DADAT)
+	cinemas String?
+	screenings String?
+	ticket String?
 	bookingDate String?
 	totalPrice Decimal?
 

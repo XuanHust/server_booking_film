@@ -20,4 +20,16 @@ export class CreateBookingDto {
   @IsString()
   @IsNotEmpty()
   bookingDate: string
+
+  @IsString()
+  @IsNotEmpty()
+  cinemas: string
+
+  @IsString()
+  @IsNotEmpty()
+  ticket: string
+
+  @IsString()
+  @IsNotEmpty()
+  screenings: string
 }

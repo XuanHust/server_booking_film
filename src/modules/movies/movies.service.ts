@@ -61,12 +61,13 @@ export class MoviesService {
   }
 
   async getMovies(query: GetMovieDto) {
-    const { page, size, genre, _q, director } = query
+    const { page, size, genre, _q, director, cinemaId } = query
     const skip = (page - 1) * size
 
     const condition: any = {
       genre: genre,
-      director: director
+      director: director,
+      cinemaId: cinemaId
     }
     if (_q) {
       condition['OR'] = {
