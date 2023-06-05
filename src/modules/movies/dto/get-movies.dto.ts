@@ -10,4 +10,7 @@ export class GetMovieDto extends IQuery {
 
   @IsOptional()
   director?: string
+
+  @IsOptional()
+  cinemaId?: number
 }
