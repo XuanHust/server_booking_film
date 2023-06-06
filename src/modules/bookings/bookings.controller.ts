@@ -10,7 +10,7 @@ export class BookingsController {
   constructor(private readonly bookingsService: BookingsService) {}
 
   @Post()
-  @UseGuards(AccessTokenGuard)
+  // @UseGuards(AccessTokenGuard)
   create(@Body() createBookingDto: CreateBookingDto) {
     return this.bookingsService.create(createBookingDto)
   }

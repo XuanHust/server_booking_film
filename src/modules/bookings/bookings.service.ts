@@ -34,7 +34,16 @@ export class BookingsService {
       take: +size,
       include: {
         user: true,
-        movies: true
+        movies: {
+          include: {
+            cinemas: true,
+            screenings: {
+              include: {
+                tickets: true
+              }
+            }
+          }
+        }
       }
     })
     return {

@@ -1,4 +1,4 @@
-import { IsEnum, IsNotEmpty, IsNumber, IsString } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator'
 import { Status } from '@prisma/client'
 export class CreateBookingDto {
   @IsNumber()
@@ -22,14 +22,14 @@ export class CreateBookingDto {
   bookingDate: string
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   cinemas: string
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   ticket: string
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   screenings: string
 }
