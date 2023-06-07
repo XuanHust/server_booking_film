@@ -24,6 +24,19 @@ export class MoviesService {
     })
   }
 
+  async getMovie(id: number) {
+    return await this.prisma.movies.findFirst({
+      where: {
+        id
+      },
+      include: {
+        screenings: true,
+        reviews: true,
+        bookings: true
+      }
+    })
+  }
+
   async getMoviesBooingest() {
     const page = 1
     const size = 10
@@ -45,19 +58,6 @@ export class MoviesService {
     return {
       data: newDataBookingest
     }
-  }
-
-  async getMovie(id: number) {
-    return await this.prisma.movies.findFirst({
-      where: {
-        id
-      },
-      include: {
-        screenings: true,
-        reviews: true,
-        bookings: true
-      }
-    })
   }
 
   async getMovies(query: GetMovieDto) {
