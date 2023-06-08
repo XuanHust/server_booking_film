@@ -65,9 +65,9 @@ export class MoviesService {
     const skip = (page - 1) * size
 
     const condition: any = {
-      genre: genre,
-      director: director,
-      cinemaId: cinemaId
+      genre: genre ? genre : undefined,
+      director: director ? director : undefined,
+      cinemaId: cinemaId ? cinemaId : undefined
     }
     if (_q) {
       condition['OR'] = {
